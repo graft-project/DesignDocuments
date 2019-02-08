@@ -12,7 +12,8 @@
 ***
 
 ## Validation Flow Sequence Diagram
-[[images/rta-beta-pflow-v2.png|Validation Flow Sequence Diagram]]
+
+![alt Validation Flow Sequence Diagram](images/rta-beta-pflow-v2.png)
 
 > **Open Issue**
 >
@@ -29,7 +30,7 @@ where **FullTxAmount** - full transaction amount, **ASSize** - Auth Sample Size 
 * **Auth sample public identification keys**, required for RTA validation by auth sample supernodes;
 * **PoS and Wallet Proxy Supernode public identification keys**, required for service fee validation for RTA Transaction by PoS and Wallet Proxy Supernodes.
 
-Transaction private key must participate in RTA Transaction. However, in the sake of privacy, the key should not be added to transaction extra data and is to be provided separately. The transaction and transaction private key must be encrypted, using [Multiple Recipients Message Encryption](https://github.com/graft-project/graft-ng/wiki/%5BRFC-001-GSD%5D-General-Supernode-Design#multiple-recipients-message-encryption).
+Transaction private key must participate in RTA Transaction. However, in the sake of privacy, the key should not be added to transaction extra data and is to be provided separately. The transaction and transaction private key must be encrypted, using [Multiple Recipients Message Encryption](%5BRFC-001-GSD%5D-General-Supernode-Design.md#multiple-recipients-message-encryption).
 
 ## RTA Transaction Validation
 RTA Transaction must be validated by PoS, authorization sample supernodes and proxy supernodes. During RTA validation all of them own different goals. PoS validates the amount of the transaction. Each auth sample supernode validates key images of RTA transaction (classical double-spent check) and the validation fee.
@@ -68,13 +69,13 @@ To validate RTA Transaction graftnode should perform several checks:
 
 ## Validation Flow Description
 
-1. PoS generates PoS one-time identification keypair and RTA payment ID based on PoS public one-time identification key. Then PoS sends RTA payment ID to Proxy Supernode and asks payment block number, payment block hash, and Auth Sample Data (8 pairs of the supernode public identification key and public wallet address, see [Selecting Auth Sample Supernode List](https://github.com/graft-project/graft-ng/wiki/%5BRFC-002-SLS%5D-Supernode-List-Selection#selecting-auth-sample-list)).
+1. PoS generates PoS one-time identification keypair and RTA payment ID based on PoS public one-time identification key. Then PoS sends RTA payment ID to Proxy Supernode and asks payment block number, payment block hash, and Auth Sample Data (8 pairs of the supernode public identification key and public wallet address, see [Selecting Auth Sample Supernode List](%5BRFC-002-SLS%5D-Supernode-List-Selection.md#selecting-auth-sample-list)).
 
-> **Payment block** is a historical block in the blockchain, `payment_block_number = current_block_number - SVP` (see [SVP](https://github.com/graft-project/graft-ng/wiki/%5BRFC-001-GSD%5D-General-Supernode-Design#supernode-prerequisites)). Payment Block defined by using its block number and block hash.
+> **Payment block** is a historical block in the blockchain, `payment_block_number = current_block_number - SVP` (see [SVP](%5BRFC-001-GSD%5D-General-Supernode-Design.md#supernode-prerequisites)). Payment Block defined by using its block number and block hash.
 
 2. When PoS got data from Proxy Supernode, it prepares and sends payment data:
     * generates the symmetric encryption key, called PoS data encryption key, serializes payment data - a list of purchased items, price and amount of each item, etc. - and encrypts it using PoS data encryption key;
-    * collects payment data - amount, encrypted serialized payment data - and encrypts it using [Multiple Recipients Message Encryption](https://github.com/graft-project/graft-ng/wiki/%5BRFC-001-GSD%5D-General-Supernode-Design#multiple-recipients-message-encryption): PoS generates random message key, encrypts payment data using the message key, then encrypts message key for each supernode in the auth sample, using supernode public identification keys;
+    * collects payment data - amount, encrypted serialized payment data - and encrypts it using [Multiple Recipients Message Encryption](%5BRFC-001-GSD%5D-General-Supernode-Design.md#multiple-recipients-message-encryption): PoS generates random message key, encrypts payment data using the message key, then encrypts message key for each supernode in the auth sample, using supernode public identification keys;
     * sends encrypted payment data and encrypted message key in the sale request to the Proxy Supernode to be multicasted by Proxy Supernode to auth sample supernodes.
 3. Proxy Supernode receives sale request from PoS and multicasts it to all supernodes in the auth sample. Supernodes in the auth sample decrypt this data using their private identification keys and store it using the RTA payment ID.
 
@@ -85,7 +86,7 @@ To validate RTA Transaction graftnode should perform several checks:
 6. Wallet Proxy Supernode 
     1. receives wallet request,
     2. validates selected auth sample and
-    3. returns encrypted serialized payment data, Auth Sample Data (8 pairs of the supernode public identification key and public wallet address, see [Selecting Auth Sample Supernode List](https://github.com/graft-project/graft-ng/wiki/%5BRFC-002-SLS%5D-Supernode-List-Selection#selecting-auth-sample-list)), PoS and Wallet Proxy Supernode public identification keys and public wallet addresses.
+    3. returns encrypted serialized payment data, Auth Sample Data (8 pairs of the supernode public identification key and public wallet address, see [Selecting Auth Sample Supernode List](%5BRFC-002-SLS%5D-Supernode-List-Selection.md#selecting-auth-sample-list)), PoS and Wallet Proxy Supernode public identification keys and public wallet addresses.
 7. If Wallet Proxy Supernode doesn't have encrypted serialized payment data and PoS Proxy Supernode public identification key and public wallet address:
     1. it looks up Auth Sample and requests the data from one of the randomly selected supernode in the auth sample. The request is sent as a unicast async message to the remote supernode. 
     2. remote supernode replies on this request and returns payment data encrypted by the public identification key of a supernode required the data. The reply is sent as a unicast async message.
@@ -93,7 +94,7 @@ To validate RTA Transaction graftnode should perform several checks:
     * builds graft transaction, distributing fee over auth sample and Proxy Supernodes (more details on that can be found in the whitepaper);
     * stores RTA payment ID, PoS public one-time identification key (used to identify PoS in the network and protect data for it), auth sample supernode public identification keys (graftnode will need it to validate auth sample signatures), PoS and Wallet Proxy Supernode identification keys to transaction_header.extra.
     * signs transaction,
-    * encrypts transaction blob and transaction private key using [Multiple Recipients Message Encryption](https://github.com/graft-project/graft-ng/wiki/%5BRFC-001-GSD%5D-General-Supernode-Design#multiple-recipients-message-encryption) for PoS, auth sample supernodes and proxy supernodes, and
+    * encrypts transaction blob and transaction private key using [Multiple Recipients Message Encryption](%5BRFC-001-GSD%5D-General-Supernode-Design.md#multiple-recipients-message-encryption) for PoS, auth sample supernodes and proxy supernodes, and
     * sends encrypted transaction blob, encrypted transaction private key and encrypted message key to the Wallet Proxy Supernode.
 9. Once Wallet Proxy Supernode receives wallet request with the encrypted transaction blob and transaction private key, it multicasts encrypted transaction, encrypted transaction private key and encrypted message keys to the auth sample supernodes and proxy supernodes.
 10. Every supernode in the auth sample, upon receiving an encrypted transaction blob, encrypted transaction private key and encrypted message key, does next operations:
@@ -123,11 +124,11 @@ To validate RTA Transaction graftnode should perform several checks:
     3. if the validation pass, PoS
         1. signs transaction using its PoS private one-time identification key,
         2. adds the signature to the transaction_header.extra,
-        3. encrypts transaction using [Multiple Recipients Message Encryption](https://github.com/graft-project/graft-ng/wiki/%5BRFC-001-GSD%5D-General-Supernode-Design#multiple-recipients-message-encryption) for auth sample supernodes, and
+        3. encrypts transaction using [Multiple Recipients Message Encryption](%5BRFC-001-GSD%5D-General-Supernode-Design.md#multiple-recipients-message-encryption) for auth sample supernodes, and
         4. sends the encrypted transaction to its Proxy Supernode.
     4. if the transaction is invalid, PoS
         1. creates "status fail" message, including status and signature generated using the PoS private one-time identification key,
-        2. encrypts signed "status fail" message using [Multiple Recipients Message Encryption](https://github.com/graft-project/graft-ng/wiki/%5BRFC-001-GSD%5D-General-Supernode-Design#multiple-recipients-message-encryption) for auth sample supernodes, and
+        2. encrypts signed "status fail" message using [Multiple Recipients Message Encryption](%5BRFC-001-GSD%5D-General-Supernode-Design.md#multiple-recipients-message-encryption) for auth sample supernodes, and
         3. sends the encrypted status message to its Proxy Supernode.
 17. When Proxy Supernode receives the encrypted transaction or the encrypted "status fail" message from PoS, it multicasts data to the auth sample supernodes.
 18. Authorization sample supernodes receive the message from Proxy Supernode and process it:
