@@ -26,7 +26,7 @@ A supernode generates temporal Supernode Identification Keypair (SIK), which use
 > TRP - Trusted Re-staking Period: The number of blocks during which supernode is allowed to participate in RTA validation even if its stake transaction already unlocked.
 
 # New Supernode Registration
-To register a supernode, an owner needs to run the supernode, providing the public wallet address as a configuration parameter. Not storing any wallet related private information on supernode is a more secure approach, but it doesn't allow automatic re-staking. For more details about the renewal of stake see "[Supernode Re-staking Process](https://github.com/graft-project/graft-ng/wiki/%5BRFC-001-GSD%5D-General-Supernode-Design#supernode-re-staking-process)" section.
+To register a supernode, an owner needs to run the supernode, providing the public wallet address as a configuration parameter. Not storing any wallet related private information on supernode is a more secure approach, but it doesn't allow automatic re-staking. For more details about the renewal of stake see "[Supernode Re-staking Process](%5BRFC-001-GSD%5D-General-Supernode-Design.md#supernode-re-staking-process)" section.
 
 To configure the supernode in authorization mode, the owner must generate a stake transaction and submit it to the blockchain. Stake transaction must include the following data:
 
