@@ -9,13 +9,7 @@ Yet another, less critical but still important, issue is present in the current 
 
 Those issues were raised by *@jagerman* (see [#187](https://github.com/graft-project/graft-ng/issues/187)). The following document lists several approaches we considering, addressing the concerns.
 
-
-When we first started working on issue, we were mainly focused on _Option 1_ since it would allow us to reduce the amount of traffic without making significant changes to current design. Options 3 and 4 were also under consideration. At the same time we started work on disqualification transactions design -- this mechanism means to be used in any case. Later, however, digging into _Options 3_ and _4_ brought us to _Option 2_, which we believe is the most optimal solution taking into account all practical considerations. 
-
-**Publishing this document we would like to hear reaction of the community before making the final decision.**
-
-Since there are still a few open issues, the estimates provided below are preliminary and may be changed if development scope needs to be extended.
-
+The new design attempts to resolve the issues, without adding new infrastructural elements to the system.
 
 ## Optimization
 
