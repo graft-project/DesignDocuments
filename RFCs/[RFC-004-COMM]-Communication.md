@@ -44,7 +44,7 @@ Both mechanisms can be used either in conjunction or on their own.
 
 ### High level design
 
-1.  Upon a supernode joining the network, it retrieves the list of public identification keys from the blockchain (active supernodes), encrypts its public identification key and IP using keys from a randomly selects subset, and broadcasts the encrypted data (jump list) over P2P network.
+1.  Upon a supernode joining the network, it retrieves the list of public identification keys from the blockchain (active supernodes), encrypts its public identification key and IP using keys from a randomly selected subset, and broadcasts the encrypted data (jump list) over P2P network.
 2.  Every few hours the supernode checks the selected supernodes are still active, and reselect inactive nodes. Then it repeats the broadcast procedure, described above.
 3.  When sending a message, a supernode broadcasts it over P2P network. Broadcast is limited by a maximal number of hops. When the message reaches a node that knows recipient's IP, it's forwarded directly to the recipient.
 4.  The recipient receives multiple copies of the same message, and should be able to handle this situation gracefully, with no noticeable performance degradation.
