@@ -237,11 +237,10 @@ Disqualification Period (SDP) (called **SDPBlockNumber**).
         2. supernode disqualification score,
         3. type of disqualification transaction,
         4. block number of the block which includes corresponding disqualification transaction. 
-    6. If disqualified supernode already presents in the blockchain-based disqualification list, simply adds new data to the related 
-    item in the list without duplicating the supernode entry itself.
+    6. If disqualified supernode already presents in the blockchain-based disqualification list, simply adds new data to the related item in the list without duplicating the supernode entry itself.
 
 ### Selecting current Blockchain-based List
-
+##### (After the discussion this section will be moved to [Supernode List Selection](https://github.com/graft-project/DesignDocuments/blob/master/RFCs/%5BRFC-002-SLS%5D-Supernode-List-Selection.md) document)
 To form the current blockchain-based list from the **Full Blockchain-based List** for some block, graftnode performs the following 
 operations:
 
