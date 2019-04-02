@@ -1,10 +1,11 @@
 # Disqualification Flow
-## Draft, version 0.1
+## Draft, version 0.2
 
 ### Change Log
 | Date       | RFC Version |
 |------------|-------------|
 | 03/26/2019 | 0.1         |
+| 04/02/2019 | 0.2         |
 
 ***
 
@@ -241,18 +242,14 @@ Disqualification Period (SDP) (called **SDPBlockNumber**).
 
 ### Selecting current Blockchain-based List
 ##### (After the discussion this section will be moved to [Supernode List Selection](https://github.com/graft-project/DesignDocuments/blob/master/RFCs/%5BRFC-002-SLS%5D-Supernode-List-Selection.md) document)
-To form the current blockchain-based list from the **Full Blockchain-based List** for some block, graftnode performs the following 
-operations:
+**Blockchain-based List** is selected for each supernode tier. To form the blockchain-based list for some supernode tier from the **Full Blockchain-based List** for some block, graftnode performs the following operations:
 
-1. Gets block hash (hexadecimal encoded) for the block we build Blockchain-based List for, and splits it into bytes.
-2. Gets **Blockchain-based List** or the previous block hash:
-    1. Sorts previous **Blockchain-based List** by accumulated age of stake (AAoS).
-    2. Gets first **PBLSize** bytes from the split block hash and selects **PBLSize** supernodes from it, using these one-byte 
-    numbers as indexes. If selected supernode is already taken, increase the index by one and check next supernode in the list until 
-    it found unselected supernode. Then graftnode moves to the next one-byte number and searches for next supernode.
+1. Gets block hash (hexadecimal encoded) for the block, for which we build Blockchain-based List and initializes seed of pseudo-random generator (for example, Mersenne Twister) using this block hash.
+2. Gets **Blockchain-based List** for current supernode tier using the previous block hash:
+    1. Checks if all supernodes from previous **Blockchain-based List** have stakes which satisfy requirements for current supernode tier. If supernode does not satisfy tier requirements, it removed from the list.
+    2. Sorts selected supernodes by accumulated age of stake (AAoS). If accumulated ages of the stake of some supernodes are equal, these supernodes sorted by their public identification keys.
+    3. Gets number from the pseudo-random generator, normalize it by the size of **Blockchain-based List** and selects supernode by this number from **Blockchain-based List**. If selected supernode is already present in the list, graftnode skips it. The process continues until graftnode selects **PBLSize** supernodes or selects all available supernodes.
 3. Gets **Full Blockchain-based List**:
-    1. Sorts **Full Blockchain-based List** by accumulated age of stake (AAoS).
-    2. Gets next **RBLSize** bytes from the split block hash and selects **RBLSize** supernodes from it, using these one-byte numbers 
-    as indexes. If selected supernode is already taken, increase the index by one and check next supernode in the list until it found 
-    unselected supernode. Then graftnode moves to the next one-byte number and searches for next supernode.
-4. Joins both sublists into one list.
+    1. Selects all supernodes from **Full Blockchain-based List**, which have stakes that satisfy requirements for current supernode tier.
+    2. Sorts selected supernodes from **Full Blockchain-based List** by accumulated age of stake (AAoS). If accumulated ages of the stake of some supernodes are equal, these supernodes sorted by their public identification keys.
+    3. Gets number from the pseudo-random generator, normalize it by the size of **Blockchain-based List** and selects supernode by this number from **Blockchain-based List**. If selected supernode is already present in the list, graftnode skips it. The process continues until graftnode selects **RBLSize** supernodes or number of selected supernodes from previous **Blockchain-based List** and **Full Blockchain-based List** won't be equal to **BSLSize**.
