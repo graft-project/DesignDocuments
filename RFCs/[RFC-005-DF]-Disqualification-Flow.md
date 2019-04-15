@@ -81,11 +81,11 @@ data is incorrect, the disqualification transaction should be rejected.
     the selected qualification sample.
 *   check correctness of the list of supernodes to be disqualified. Depending on the type of the disqualification transaction, 
 this validation can differ:
-    *   for the disqualification transaction from **Authorization Disqualification Sample**, disqualified supernodes should be 
+    *   for the disqualification transaction from **Authorization Qualification Sample**, disqualified supernodes should be 
     part of the authorization sample. To validate them, graftnode should
         *   select the qualification sample using qualification sample data,
         *   validate if disqualified-to-be supernodes are a part of the selected qualification sample.
-    *   for the disqualification transaction from **_Blockchain-based Disqualification Sample,_** disqualified supernodes should 
+    *   for the disqualification transaction from **_Blockchain-based Qualification Sample,_** disqualified supernodes should 
     be part of the **Full Blockchain-based List** or next **Blockchain-based List**. To validate them, graftnode should
         *   select the **Full Blockchain-based List** or next **Blockchain-based List** using qualification sample data,
         *   validate if disqualified-to-be supernodes are a part of the selected list.
