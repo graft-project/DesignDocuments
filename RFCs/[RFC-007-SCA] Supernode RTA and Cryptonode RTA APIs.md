@@ -1,12 +1,17 @@
 # Supernode RTA and Cryptonode RTA APIs
-1.[Supernode Core Interfaces](#supernode-core-interfaces)
+1. [Supernode Core Interfaces](#supernode-core-interfaces)
 
-   1.1 [GetPaymentData - return payment data for given payment id, block number, block hash](#getpaymentdata-return-payment-data-for-given-payment-id,-block-number,-block-hash)
-   1.2 [StorePaymentData - handles payment multicast and stores payment data. Called by Cryptonode to it's connected supernode](#storepaymentdata-handles-payment-multicast-and-stores-payment-data.-Called-by-Cryptonode-to-it's-connected-supernode)
-   1.3 [AuthorizeRtaTx - process incoming RTA Tx authorization  (handled by auth sample, PoS Proxy and Wallet Proxy)](#authorizertatx-process-incoming-rta-tx-authorization-(handled-by-auth-sample,-pos-proxy-and-wallet-proxy))
-   1.4 [UpdatePaymentStatus - handles broadcast with payment status update](#updatepaymentstatus-handles-broadcast-with-payment-status-update)
-   1.5 [GetAuthSample - returns auth sample for given payment id and block number](#getauthsample-returns-auth-sample-for-given-payment-id-and-block-number)
-   1.6 [GetSupernodeList - returns list of valid or all known supernodes](#getsupernodelist-returns-list-of-valid-or-all-known-supernodes)
+    1.1 [GetPaymentData - return payment data for given payment id, block number, block hash](#getpaymentdata-return-payment-data-for-given-payment-id,-block-number,-block-hash)
+   
+    1.2 [StorePaymentData - handles payment multicast and stores payment data. Called by Cryptonode to it's connected supernode](#storepaymentdata-handles-payment-multicast-and-stores-payment-data.-Called-by-Cryptonode-to-it's-connected-supernode)
+   
+    1.3 [AuthorizeRtaTx - process incoming RTA Tx authorization  (handled by auth sample, PoS Proxy and Wallet Proxy)](#authorizertatx-process-incoming-rta-tx-authorization-(handled-by-auth-sample,-pos-proxy-and-wallet-proxy))
+   
+    1.4 [UpdatePaymentStatus - handles broadcast with payment status update](#updatepaymentstatus-handles-broadcast-with-payment-status-update)
+   
+    1.5 [GetAuthSample - returns auth sample for given payment id and block number](#getauthsample-returns-auth-sample-for-given-payment-id-and-block-number)
+   
+    1.6 [GetSupernodeList - returns list of valid or all known supernodes](#getsupernodelist-returns-list-of-valid-or-all-known-supernodes)
 
 2. [Pos/Wallet Interfaces](#pos/wallet-interfaces)
    
@@ -14,7 +19,7 @@
 
     2.2 [Sale - process sale. Сalled by PoS](#sale-process-sale.-called-by-pos)
 
-    2.3 [GetPaymentData - returns payment data for given payment id, block number, block hash. Called by PoS or Wallet](#getpaymentdata-returns-payment-data-for-given-payment-id-block-number-block-hash-called-by-pos-or-wallet)
+    2.3 [GetPaymentData - returns payment data for given payment id, block number, block hash. Called by PoS or Wallet](#getpaymentdata-returns-payment-data-for-given-payment-id-block-number-block-hash.-called-by-pos-or-wallet)
 
     2.4 [Pay - process payment. Called by Wallet](#pay-process-payment.-called-by-wallet)
    
@@ -28,7 +33,7 @@
 
     3.3 [Unicast - sends direct message to the specific supernode](#unicast-sends-direct-message-to-the-specific-supernode)
    
-    3.4 [SendSupernodeAnnounce - supernode announces itself, to be broadcasted on p2p network](#sendsupernodeannounce-supernode announces-itself,-to-be-broadcasted-on-p2p-network)
+    3.4 [SendSupernodeAnnounce - supernode announces itself, to be broadcasted on p2p network](#sendsupernodeannounce-supernode announces-itself-to-be-broadcasted-on-p2p-network)
 
 4. [P2P messages](#P2P-messages)
    
@@ -46,23 +51,24 @@
 ### 1.1 GetPaymentData - return payment data for given payment id, block number, block hash
 Input:
 
-PaymentID - globally unique payment id
-BlockNumber - number of block auth sample built for;
-BlockHash  - hash of this block in blockchain (probably redudant);
-CallbackURI -  optional, if set - do not return response to caller but send it as separate unicast message
+- PaymentID - globally unique payment id
+- BlockNumber - number of block auth sample built for;
+- BlockHash  - hash of this block in blockchain (probably redudant);
+- CallbackURI -  optional, if set - do not return response to caller but send it as separate unicast message
+
 Output: 
+- PaymentData - serialized encrypted payment data
+- AuthSampeKeys - array of N (N=8) public supernode ids and it's message keys. It's possible to retrieve a wallet address by public id
 
-PaymentData - serialized encrypted payment data
-AuthSampeKeys - array of N (N=8) public supernode ids and it's message keys. It's possible to retrieve a wallet address by public id
 Notes:
+- call can be either synchronous or asynchronous
 
-call can be either synchronous or asynchronous
 Request:
 ```ruby
 POST /core/get_payment_data
 ```
 Request body:
-```
+```ruby
 {
     "PaymentId": "payment_id string",
     "BlockNumber": 123456,
@@ -70,8 +76,11 @@ Request body:
 }
 ```
 Normal response (sync call):
-```
+```ruby
 HTTP code: 200
+```
+Response body:
+```ruby
 {
      "PaymentData": {
            "EncryptedPayment":  "08600e7b9bb...08600e7b9bb", // encrypted serialized payment (incl amount and payment details)
@@ -93,37 +102,40 @@ HTTP code: 200
 }
 ```
 Normal response (async call, from remote peer via unicast message)
-
+```ruby
 HTTP code: 202
+```
 Response body: `N/A`
 
 Error response:
-```
+```ruby
 HTTP code: 500
 ```
 Response body:
-```
+```ruby
 {
     "code": <error_code>,
     "message": "Error description"
 }
 ```
-StorePaymentData - handles payment multicast and stores payment data. Called by Cryptonode to it's connected supernode.
-PaymentID - globally unique payment id
-PaymentData - serialized encrypted payment data (incl amount and purchase details)
-MessageKeys - array of encrypted message keys corresponding to each auth sample members. Keys needed to decrypt PaymentData and Amount
+### 1.2 StorePaymentData - handles payment multicast and stores payment data. Called by Cryptonode to it's connected supernode.
+
+- PaymentID - globally unique payment id
+- PaymentData - serialized encrypted payment data (incl amount and purchase details)
+- MessageKeys - array of encrypted message keys corresponding to each auth sample members. Keys needed to decrypt PaymentData and Amount
+
 Output: 
+- None
 
-None
 Notes:
+- Caller doesn't need any response 
 
-Caller doesn't need any response 
 Request:
-```
+```ruby
 POST /core/store_payment_data
 ```
 Request body:
-```
+```ruby
 {
     "PaymentId": "payment_id string",
  
@@ -147,38 +159,39 @@ Request body:
 }
 ```
 Normal response:
-```
+```ruby
 HTTP code: 202
 ```
 Response body: `N/A`
 
 Error response:
-```
+```ruby
 HTTP code: 500
 ```
 Response body:
-```
+```ruby
 {
     "code": <error_code>,
     "message": "Error description"
 }
 ```
-AuthorizeRtaTx - process incoming RTA Tx authorization  (handled by auth sample, PoS Proxy and Wallet Proxy)
+### 1.3 AuthorizeRtaTx - process incoming RTA Tx authorization  (handled by auth sample, PoS Proxy and Wallet Proxy)
+
 Input:
 
-TxBlob - encrypted transaction blob (encrypted transaction blob, serialized as hexadecimal)
-TxKey  - encrypted transaction private key, serialized as hexadecimal;
-MessageKeys - Map of  Auth sample ids and corresponding encrypted message keys to decrypt tx key
-Output: 
+- TxBlob - encrypted transaction blob (encrypted transaction blob, serialized as hexadecimal)
+- TxKey  - encrypted transaction private key, serialized as hexadecimal;
+- MessageKeys - Map of  Auth sample ids and corresponding encrypted message keys to decrypt tx key
 
-None (this is async call)
+Output: 
+- None (this is async call)
 
 Request
-```
+```ruby
 POST: /core/authorize_rta_tx
 ```
 Request body:
-```
+```ruby
 {
     "TxBlob": "08600e7b9bb...08600e7b9bb", // encrypted serialized transaction as hexadecimal string. Includes payment id;
     "TxKey" : "08600....a9ab18bfa5", // encrypted tx key.
@@ -196,71 +209,76 @@ Request body:
 }
 ```
 Normal response:
-```
-HTTP code: 202
-```
-Response body: N/A
-
-Error response:
-```
-HTTP code: 500
-```
-Response body:
-```
-{
-    "code": <error_code>,
-    "message": "Error description"
-}
-```
-UpdatePaymentStatus - handles broadcast with payment status update
-Input:
-
-PaymentID - globally unique payment id
-Status - payment status, integer constant
-PubKey - public id key of supernode who updates status
-Signature - message signature (signed message is concatenated PaymentID, Status, PubKey)
-Output: 
-
-None 
-Request
-```
-POST: /core/update_payment_status
-```
-Normal response:
-```
+```ruby
 HTTP code: 202
 ```
 Response body: `N/A`
 
 Error response:
-```
+```ruby
 HTTP code: 500
 ```
 Response body:
-```
+```ruby
 {
     "code": <error_code>,
     "message": "Error description"
 }
 ```
-GetAuthSample - returns auth sample for given payment id and block number
+### 1.4 UpdatePaymentStatus - handles broadcast with payment status update
+
 Input:
 
-PaymentID - globally unique payment id
-BlockNumber - block number to build sample on
-Output: 
+- PaymentID - globally unique payment id
+- Status - payment status, integer constant
+- PubKey - public id key of supernode who updates status
+- Signature - message signature (signed message is concatenated PaymentID, Status, PubKey)
 
-Array of N (N=8) auth sample members
+Output: 
+- None 
+
 Request
+```ruby
+POST: /core/update_payment_status
 ```
+Normal response:
+```ruby
+HTTP code: 202
+```
+Response body: `N/A`
+
+Error response:
+```ruby
+HTTP code: 500
+```
+Response body:
+```ruby
+{
+    "code": <error_code>,
+    "message": "Error description"
+}
+```
+
+### 1.5 GetAuthSample - returns auth sample for given payment id and block number
+
+Input:
+
+- PaymentID - globally unique payment id
+- BlockNumber - block number to build sample on
+
+Output: 
+- Array of N (N=8) auth sample members
+
+Request
+```ruby
 POST: /core/get_auth_sample
 ```
 Normal response:
-```
+```ruby
 HTTP code: 200
 ```
 Response body:
-```
+```ruby
 {
     "AuthSample" : [
             "1f0a6a65fc768348f781b0ad58dcc910408c3bd85cfab9d451577f5a98261805",
@@ -275,32 +293,34 @@ Response body:
 }
 ```
 Error response:
-
+```ruby
 HTTP code: 500
-Response body:
 ```
+Response body:
+```ruby
 {
     "code": <error_code>,
     "message": "Error description"
 }
 ```
-GetSupernodeList - returns list of valid or all known supernodes
+### 1.6 GetSupernodeList - returns list of valid or all known supernodes
+
 Input:
+- ReturnAll - if set  - all known supernodes returned; otherwise - only valid ones (valid stake and recently updated)
 
-ReturnAll - if set  - all known supernodes returned; otherwise - only valid ones (valid stake and recently updated)
 Output: 
+- Array of Objects representing supernode
 
-Array of Objects representing supernode
 Request
-```
+```ruby
 GET: /core/get_supernode_list/<return_all> 
 ```
 Normal response:
-```
+```ruby
 HTTP code: 200
 ```
 Response body:
-```
+```ruby
 "items": [
             {
                 "Address": "",
@@ -330,11 +350,11 @@ Response body:
 ]
 ```
 Error response:
-```
+```ruby
 HTTP code: 500
 ```
 Response body:
-```
+```ruby
 {
     "code": <error_code>,
     "message": "Error description"
@@ -342,36 +362,34 @@ Response body:
 ```
 ## 2. Pos/Wallet Interfaces
 
+### 2.1 Presale - supernode returns auth sample for given payment id. Called by PoS
 
-Presale - supernode returns auth sample for given payment id. Called by PoS
 Input:
-
-PaymentID - randomly generated string (TODO: define what is the form of the string - e.g. GUID, some fixed size hexadecimal/base64/base58 etc)
+- PaymentID - randomly generated string (TODO: define what is the form of the string - e.g. GUID, some fixed size hexadecimal/base64/base58 etc)
 Output: 
+- BlockNumber - number of block auth sample built for;
+- BlockHash  - hash of this block in blockchain (probably redudant);
+- AuthSample - array of N (N=8) public supernode ids
 
-BlockNumber - number of block auth sample built for;
-BlockHash  - hash of this block in blockchain (probably redudant);
-AuthSample - array of N (N=8) public supernode ids
 Notes: 
-
-call is synchronous, returns result to the client immediately
-
+- call is synchronous, returns result to the client immediately
 
 Request:
-```
+```ruby
 POST: /dapi/v3.0/presale
 ```
 Request body:
-```
+```ruby
 {
     "PaymentId": "payment_id string"
 }
 ```
 Normal response:
-
+```ruby
 HTTP code: 200 
-Response body:
 ```
+Response body:
+```ruby
 {
     "BlockNumber": 310173,
     "BlockHash": "66a740478c1d1b01fa90b4d70988a02c781f16470256d8104a71e1838d8038f1",
@@ -392,30 +410,31 @@ Response body:
 }
 ```
 Error response:
-
+```ruby
 HTTP code: 500
-Response body:
 ```
+Response body:
+```ruby
 {
     "code": <error_code>,
     "message": "Error description"
 }
 ```
 
-Sale - process sale. Сalled by PoS
+### 2.2 Sale - process sale. Сalled by PoS
+
 Input:
+- PaymentData - encrypted payment data blob (list of items, amounts, any other info)
+- Amount - encrypted transaction amount in atomic units 
+- MessageKeys - array of encrypted message keys (to decrypt PaymentData and Amount)
 
-PaymentData - encrypted payment data blob (list of items, amounts, any other info)
-Amount - encrypted transaction amount in atomic units 
-MessageKeys - array of encrypted message keys (to decrypt PaymentData and Amount)
 Output: 
+- Accepted or error 
 
-Accepted or error 
-
-POST: /dapi/v3.0/sale/
+POST: `/dapi/v3.0/sale/`
 
 Payload
-```
+```ruby
 {
     "PaymentID" : <globally unique payment id>
     "PaymentData": {
@@ -438,34 +457,39 @@ Payload
 }
 ```
 Normal response:
-
+```ruby
 HTTP code: 202 accepted
-Error response:
 ```
+Error response:
+```ruby
 HTTP code: 500
 ```
 Response body:
-```
+```ruby
 {
     "code": <error_code>,
     "message": "Error description"
 }
 ```
-GetPaymentData - returns payment data for given payment id, block number, block hash. Called by PoS or Wallet
+### 2.3 GetPaymentData - returns payment data for given payment id, block number, block hash. Called by PoS or Wallet
+
 Input:
 
-PaymentID - globally unique payment id
-BlockNumber - number of block auth sample built for;
-BlockHash  - hash of this block in blockchain (probably redudant);
+- PaymentID - globally unique payment id
+- BlockNumber - number of block auth sample built for;
+- BlockHash  - hash of this block in blockchain (probably redudant);
+
 Output: 
 
-PaymentData - serialized encrypted payment data
-AuthSampeKeys - array of N (N=8) public supernode ids and it's message keys. It's possible to retrieve a wallet address by public id
+- PaymentData - serialized encrypted payment data
+- AuthSampeKeys - array of N (N=8) public supernode ids and it's message keys. It's possible to retrieve a wallet address by public id
+
 Notes:
 
-call is synchronous
+- call is synchronous
+
 Request:
-```
+```ruby
 POST /dapi/v3.0/get_payment_data
 ```
 Request body:
@@ -477,8 +501,11 @@ Request body:
 }
 ```
 Normal response  (payment data found on the given supernode):
-```
+```ruby
 HTTP code: 200
+```
+Response body:
+```ruby
 {
      "PaymentData": {
            "EncryptedPayment":  "08600e7b9bb...08600e7b9bb", // encrypted serialized payment (incl amount and payment details)
@@ -500,37 +527,39 @@ HTTP code: 200
 }
 ```
 Pending response (payment data was not found on given supernode, supernode sends request to another supernode)
-```
+```ruby
 HTTP code: 202
 ```
-Response body: N/A
+Response body: `N/A`
 
 Error response (payment id already known as failed):
-```
+```ruby
 HTTP code: 500
 ```
 Response body:
-```
+```ruby
 {
     "code": <error_code>,
     "message": "Error description"
 }
 ```
 
-Pay - process payment. Called by Wallet
+### 2.4 Pay - process payment. Called by Wallet
+
 Input:
 
-TxBlob - encrypted transaction blob
-TxKey - encrypted transaction private key
-MessageKeys - encrypted message keys (multiple recipients encryption, to decrypt transaction and tx private key)
+- TxBlob - encrypted transaction blob
+- TxKey - encrypted transaction private key
+- MessageKeys - encrypted message keys (multiple recipients encryption, to decrypt transaction and tx private key)
+
 Output: 
 
-Accepted or error 
+- Accepted or error 
 
-POST: /dapi/v3.0/pay/
+POST: `/dapi/v3.0/pay/`
 
 Payload
-```
+```ruby
 {
     "TxBlob": "08600e7b9bb...08600e7b9bb", // encrypted serialized transaction as hexadecimal string. Includes payment id;
     "TxKey" : "08600....a9ab18bfa5", // encrypted tx private key.
@@ -549,37 +578,38 @@ Payload
 }
 ```
 Normal response:
-```
+```ruby
 HTTP code: 202 accepted
 ```
 Error response:
-```
+```ruby
 HTTP code: 500
 ```
 Response body:
-```
+```ruby
 {
     "code": <error_code>,
     "message": "Error description"
 }
 ```
-GetPaymentStatus - returns payment status for given payment id
+### 2.5 GetPaymentStatus - returns payment status for given payment id
+
 Request:
-```
+```ruby
 POST: /dapi/v3.0/get_payment_status/
 ```
 Payload
-```
+```ruby
 {
     "PaymentId" : "payment_id string"
 }
 ```
 Normal response:
-```
+```ruby
 HTTP code: 200
 ```
 Response body:
-```
+```ruby
 {
     
    "Status" : 1 (Waiting) | 2 (InProgress) | 3 (Success) | 4 (Fail) | 5 (RejectedByWallet) | 6 (RejectedByPOS)
@@ -587,18 +617,19 @@ Response body:
 }
 ```
 Error response:
-```
+```ruby
 HTTP code: 500
 ```
 Response body:
-```
+```ruby
 {
     "code": <error_code>,
     "message": "Error description"
 }
 ```
 ## 3. JSON-RPC interfaces on cryptonode side to communicate with supernode
-Broadcast - broadcasts message  to all the network
+
+### 3.1 Broadcast - broadcasts message  to all the network
 This call will be called by supernode in case sale details with given payment id wasn't found in local supernode (supernode handling "sale_details" call from wallet)
 
 Request URI:
