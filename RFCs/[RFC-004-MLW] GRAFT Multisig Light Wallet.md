@@ -6,29 +6,29 @@
 ## Wallet Creation
 1. LCW does next operations:
 
-   a. generates multisig data (analogue to CLI prepare_multisig command)
+   a. generates multisig data (analogue to CLI `prepare_multisig` command)
 
    b. sends multisig data to the WB
 
 2. When WB receives multisig data from LCW, it:
    
-   a. generates own multisig data (analogue to CLI prepare_multisig command)
+   a. generates own multisig data (analogue to CLI `prepare_multisig` command)
   
    b. sends these multisig data to the LCW
   
-   c. creates 2/2 multisig wallet using LCW multisig data (analogue to CLI make_multisig command).
+   c. creates 2/2 multisig wallet using LCW multisig data (analogue to CLI `make_multisig` command).
   
 3. When LCW receives multisig data from WB, it 
 
-   a. creates 2/2 multisig wallet using these multisig data (analogue to CLI make_multisig command)
+   a. creates 2/2 multisig wallet using these multisig data (analogue to CLI `make_multisig` command)
 
-   b. exports key images (analogue to CLI export_multisig_info command)
+   b. exports key images (analogue to CLI `export_multisig_info` command)
 
    c. sends key images to WB
 
 4. When WB receives key images data, it
 
-   a. imports key images (analogue to CLI import_multisig_info command)
+   a. imports key images (analogue to CLI `import_multisig_info` command)
 
    b. stores wallet data.
 
@@ -46,9 +46,9 @@
 
 2. When WB receives the transfer request, it
 
-   a. creates a partially signed transaction (analogous to CLI transfer command)
+   a. creates a partially signed transaction (analogous to CLI `transfer` command)
 
-   b. exports key images (analogue to CLI export_multisig_info command)
+   b. exports key images (analogue to CLI `export_multisig_info` command)
 
    c. stores wallet data
 
@@ -56,11 +56,11 @@
 
 3. When LCW receives an unsigned transaction and key images, it
 
-   a. signs transaction (analogue to CLI sign_multisig command)
+   a. signs transaction (analogue to CLI `sign_multisig` command)
 
-   b. imports received key images (analogue to CLI import_multisig_info command)
+   b. imports received key images (analogue to CLI `import_multisig_info` command)
 
-   c. exports its key images (analogue to CLI export_multisig_info command)
+   c. exports its key images (analogue to CLI `export_multisig_info` command)
 
    d. stores wallet data
 
@@ -70,7 +70,7 @@
 
    a. submits the transaction to the blockchain
 
-   b. imports key images (analogue to CLI import_multisig_info command)
+   b. imports key images (analogue to CLI `import_multisig_info` command)
 
    c. stores wallet data
 
