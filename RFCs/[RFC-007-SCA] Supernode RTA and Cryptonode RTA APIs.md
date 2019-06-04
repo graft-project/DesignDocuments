@@ -34,7 +34,7 @@
 
     3.3 [Unicast - sends direct message to the specific supernode](#unicast-sends-direct-message-to-the-specific-supernode)
    
-    3.4 [SendSupernodeAnnounce - supernode announces itself, to be broadcasted on p2p network](#sendsupernodeannounce-supernode announces-itself-to-be-broadcasted-on-p-p-network)
+    3.4 [SendSupernodeAnnounce - supernode announces itself, to be broadcasted on p2p network](#sendsupernodeannounce-supernode-announces-itself-to-be-broadcasted-on-p2p-network)
 
 4. [P2P messages](#P2P-messages)
    
