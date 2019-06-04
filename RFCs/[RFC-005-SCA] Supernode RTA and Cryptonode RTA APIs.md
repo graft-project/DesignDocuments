@@ -1,29 +1,52 @@
 # Supernode RTA and Cryptonode RTA APIs
 
-1Supernode Core Interfaces
-1.1GetPaymentData - return payment data for given payment id, block number, block hash
-1.2StorePaymentData - handles payment multicast and stores payment data. Called by Cryptonode to it's connected supernode.
-1.3AuthorizeRtaTx - process incoming RTA Tx authorization  (handled by auth sample, PoS Proxy and Wallet Proxy)
-1.4UpdatePaymentStatus - handles broadcast with payment status update
-1.5GetAuthSample - returns auth sample for given payment id and block number
-1.6GetSupernodeList - returns list of valid or all known supernodes
-2Pos/Wallet Interfaces
-2.1Presale - supernode returns auth sample for given payment id. Called by PoS
-2.2Sale - process sale. Сalled by PoS
-2.3GetPaymentData - returns payment data for given payment id, block number, block hash. Called by PoS or Wallet
-2.4Pay - process payment. Called by Wallet
-2.5GetPaymentStatus - returns payment status for given payment id
-3JSON-RPC interfaces on cryptonode side to communicate with supernode
-3.1Broadcast - broadcasts message  to all the network
-3.2Multicast - sends message to the group of supernodes
-3.3Unicast - sends direct message to the specific supernode
-3.4SendSupernodeAnnounce - supernode announces itself, to be broadcasted on p2p network
-4P2P messages
-4.1COMMAND_SUPERNODE_ANNOUNCE - broadcase message, supernode announces itself for the network
-4.2COMMAND_BROADCAST - broadcasted message
-4.3COMMAND_MULTICAST - message to the group of destinations
-4.4COMMAND_UNICAST - direct message to the specific destination
-Supernode Core Interfaces
+1. Supernode Core Interfaces
+
+   1.1 GetPaymentData - return payment data for given payment id, block number, block hash
+   
+   1.2 StorePaymentData - handles payment multicast and stores payment data. Called by Cryptonode to it's connected supernode.
+   
+   1.3 AuthorizeRtaTx - process incoming RTA Tx authorization  (handled by auth sample, PoS Proxy and Wallet Proxy)
+
+   1.4 UpdatePaymentStatus - handles broadcast with payment status update
+
+   1.5 GetAuthSample - returns auth sample for given payment id and block number
+
+   1.6 GetSupernodeList - returns list of valid or all known supernodes
+
+2. Pos/Wallet Interfaces
+   
+   2.1 Presale - supernode returns auth sample for given payment id. Called by PoS
+
+   2.2 Sale - process sale. Сalled by PoS
+
+   2.3 GetPaymentData - returns payment data for given payment id, block number, block hash. Called by PoS or Wallet
+
+   2.4 Pay - process payment. Called by Wallet
+   
+   2.5 GetPaymentStatus - returns payment status for given payment id
+
+3. JSON-RPC interfaces on cryptonode side to communicate with supernode
+
+   3.1 Broadcast - broadcasts message  to all the network
+
+   3.2 Multicast - sends message to the group of supernodes
+
+   3.3 Unicast - sends direct message to the specific supernode
+   
+   3.4 SendSupernodeAnnounce - supernode announces itself, to be broadcasted on p2p network
+
+4. P2P messages
+   
+   4.1 COMMAND_SUPERNODE_ANNOUNCE - broadcase message, supernode announces itself for the network
+   
+   4.2 COMMAND_BROADCAST - broadcasted message
+   
+   4.3 COMMAND_MULTICAST - message to the group of destinations
+   
+   4.4 COMMAND_UNICAST - direct message to the specific destination
+
+## 1. Supernode Core Interfaces
 
 
 GetPaymentData - return payment data for given payment id, block number, block hash
@@ -323,7 +346,7 @@ Response body:
     "message": "Error description"
 }
 ```
-Pos/Wallet Interfaces
+## 2. Pos/Wallet Interfaces
 
 
 Presale - supernode returns auth sample for given payment id. Called by PoS
@@ -580,7 +603,7 @@ Response body:
     "message": "Error description"
 }
 ```
-JSON-RPC interfaces on cryptonode side to communicate with supernode
+## 3. JSON-RPC interfaces on cryptonode side to communicate with supernode
 Broadcast - broadcasts message  to all the network
 This call will be called by supernode in case sale details with given payment id wasn't found in local supernode (supernode handling "sale_details" call from wallet)
 
@@ -743,10 +766,10 @@ Error response payload:
         "message": "message"
     }
 }
-```
-P2P messages
+
+## 4. P2P messages
 COMMAND_SUPERNODE_ANNOUNCE - broadcase message, supernode announces itself for the network
-```
+
 struct COMMAND_SUPERNODE_ANNOUNCE
 {
       const static int ID = P2P_COMMANDS_POOL_BASE + 20;
