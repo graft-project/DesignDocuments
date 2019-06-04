@@ -13,7 +13,7 @@
 
    1.6 GetSupernodeList - returns list of valid or all known supernodes
 
-2. Pos/Wallet Interfaces
+2. [Pos/Wallet Interfaces](#pos/wallet-interfaces)
    
    2.1 Presale - supernode returns auth sample for given payment id. Called by PoS
 
@@ -25,7 +25,7 @@
    
    2.5 GetPaymentStatus - returns payment status for given payment id
 
-3. JSON-RPC interfaces on cryptonode side to communicate with supernode
+3. [JSON-RPC interfaces on cryptonode side to communicate with supernode](#json-rpc-interfaces-on-cryptonode-side-to-communicate-with-supernode)
 
    3.1 Broadcast - broadcasts message  to all the network
 
@@ -35,7 +35,7 @@
    
    3.4 SendSupernodeAnnounce - supernode announces itself, to be broadcasted on p2p network
 
-4. P2P messages
+4. [P2P messages](#P2P-messages)
    
    4.1 COMMAND_SUPERNODE_ANNOUNCE - broadcase message, supernode announces itself for the network
    
