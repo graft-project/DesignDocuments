@@ -25,7 +25,7 @@ b. stores wallet data.
 3. LCW receives a WB response and stores the updated balance.
 
 ## Transfer
-_Note:_ LCW and WB should be always synced!
+>**_Note:_ LCW and WB should be always synced!**
 
 1. To spend money, LCW should
 a. send the transfer request with receiver wallet address, transfer amount and payment id or subaddress (payment id and subaddress are optional) to WB
