@@ -1,9 +1,7 @@
 # Supernode RTA and Cryptonode RTA APIs
 1.[Supernode Core Interfaces](#supernode-core-interfaces)
-
-   1.1 GetPaymentData - return payment data for given payment id, block number, block hash
-   
-   1.2 StorePaymentData - handles payment multicast and stores payment data. Called by Cryptonode to it's connected supernode.
+  1.1 [GetPaymentData - return payment data for given payment id, block number, block hash](#getpaymentdata-return-payment-data-for-given-payment-id,-block-number,-block-hash)
+  1.2 [StorePaymentData - handles payment multicast and stores payment data. Called by Cryptonode to it's connected supernode](#storepaymentdata-handles-payment-multicast-and-stores-payment-data.-Called-by-Cryptonode-to-it's-connected-supernode)
    
    1.3 AuthorizeRtaTx - process incoming RTA Tx authorization  (handled by auth sample, PoS Proxy and Wallet Proxy)
 
