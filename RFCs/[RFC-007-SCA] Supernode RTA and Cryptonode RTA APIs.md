@@ -1,4 +1,5 @@
 # Supernode RTA and Cryptonode RTA APIs
+
 1. [Supernode Core Interfaces](#supernode-core-interfaces)
 
     1.1 [GetPaymentData - return payment data for given payment id, block number, block hash](#getpaymentdata-return-payment-data-for-given-payment-id,-block-number,-block-hash)
@@ -33,7 +34,7 @@
 
     3.3 [Unicast - sends direct message to the specific supernode](#unicast-sends-direct-message-to-the-specific-supernode)
    
-    3.4 [SendSupernodeAnnounce - supernode announces itself, to be broadcasted on p2p network](#sendsupernodeannounce-supernode announces-itself-to-be-broadcasted-on-p2p-network)
+    3.4 [SendSupernodeAnnounce - supernode announces itself, to be broadcasted on p2p network](#sendsupernodeannounce-supernode announces-itself-to-be-broadcasted-on-p-p-network)
 
 4. [P2P messages](#P2P-messages)
    
@@ -101,7 +102,7 @@ Response body:
      }
 }
 ```
-Normal response (async call, from remote peer via unicast message)
+Normal response (async call, from remote peer via unicast message):
 ```ruby
 HTTP code: 202
 ```
@@ -120,6 +121,7 @@ Response body:
 ```
 ### 1.2 StorePaymentData - handles payment multicast and stores payment data. Called by Cryptonode to it's connected supernode.
 
+Input:
 - PaymentID - globally unique payment id
 - PaymentData - serialized encrypted payment data (incl amount and purchase details)
 - MessageKeys - array of encrypted message keys corresponding to each auth sample members. Keys needed to decrypt PaymentData and Amount
@@ -186,7 +188,7 @@ Input:
 Output: 
 - None (this is async call)
 
-Request
+Request:
 ```ruby
 POST: /core/authorize_rta_tx
 ```
@@ -237,7 +239,7 @@ Input:
 Output: 
 - None 
 
-Request
+Request:
 ```ruby
 POST: /core/update_payment_status
 ```
@@ -269,7 +271,7 @@ Input:
 Output: 
 - Array of N (N=8) auth sample members
 
-Request
+Request:
 ```ruby
 POST: /core/get_auth_sample
 ```
@@ -311,7 +313,7 @@ Input:
 Output: 
 - Array of Objects representing supernode
 
-Request
+Request:
 ```ruby
 GET: /core/get_supernode_list/<return_all> 
 ```
@@ -433,7 +435,7 @@ Output:
 
 POST: `/dapi/v3.0/sale/`
 
-Payload
+Payload:
 ```ruby
 {
     "PaymentID" : <globally unique payment id>
@@ -526,7 +528,7 @@ Response body:
      }
 }
 ```
-Pending response (payment data was not found on given supernode, supernode sends request to another supernode)
+Pending response (payment data was not found on given supernode, supernode sends request to another supernode):
 ```ruby
 HTTP code: 202
 ```
@@ -558,7 +560,7 @@ Output:
 
 POST: `/dapi/v3.0/pay/`
 
-Payload
+Payload:
 ```ruby
 {
     "TxBlob": "08600e7b9bb...08600e7b9bb", // encrypted serialized transaction as hexadecimal string. Includes payment id;
@@ -598,7 +600,7 @@ Request:
 ```ruby
 POST: /dapi/v3.0/get_payment_status/
 ```
-Payload
+Payload:
 ```ruby
 {
     "PaymentId" : "payment_id string"
@@ -630,14 +632,15 @@ Response body:
 ## 3. JSON-RPC interfaces on cryptonode side to communicate with supernode
 
 ### 3.1 Broadcast - broadcasts message  to all the network
+
 This call will be called by supernode in case sale details with given payment id wasn't found in local supernode (supernode handling "sale_details" call from wallet)
 
 Request URI:
-```
+```ruby
 /json_rpc/rta
 ```
 Request payload:
-```
+```ruby
 {
     "json_rpc" : "2.0",
     "method" : "broadcast",
@@ -649,9 +652,8 @@ Request payload:
     }
 }
 ```
-
 Normal response:
-```
+```ruby
 {
     "jsonrpc": "2.0",
     "id": "0",
@@ -659,8 +661,9 @@ Normal response:
         "status" : <integer value, 0 is OK>
     }
 }
-Error response:
 ```
+Error response:
+```ruby
 {
     "id": "0",
     "jsonrpc": "2.0",
@@ -670,13 +673,14 @@ Error response:
     }
 }
 ```
-Multicast - sends message to the group of supernodes
+### 3.2 Multicast - sends message to the group of supernodes
+
 Request URI:
-```
+```ruby
 /json_rpc/rta
 ```
 Request payload:
-```
+```ruby
 {
     "json_rpc" : "2.0",
     "method" : "multicast",
@@ -690,7 +694,7 @@ Request payload:
 }
 ```
 Normal Response payload:
-```
+```ruby
 {
     "jsonrpc": "2.0",
     "id": "0",
@@ -700,7 +704,7 @@ Normal Response payload:
 }
 ```
 Error response payload:
-```
+```ruby
 {
     "id": "0",
     "jsonrpc": "2.0",
@@ -710,13 +714,14 @@ Error response payload:
     }
 }
 ```
-Unicast - sends direct message to the specific supernode
+### 3.3 Unicast - sends direct message to the specific supernode
+
 Request URI:
-```
+```ruby
 /json_rpc/rta
 ```
 Request payload:
-```
+```ruby
 {
     "json_rpc" : "2.0",
     "method" : "unicast",
@@ -729,9 +734,8 @@ Request payload:
     }
 }
 ```
-
 Normal Response payload:
-```
+```ruby
 {
     "jsonrpc": "2.0",
     "id": "0",
@@ -741,7 +745,7 @@ Normal Response payload:
 }
 ```
 Error response payload:
-```
+```ruby
 {
     "id": "0",
     "jsonrpc": "2.0",
@@ -751,13 +755,13 @@ Error response payload:
     }
 }
 ```
-SendSupernodeAnnounce - supernode announces itself, to be broadcasted on p2p network
+### 3.4 SendSupernodeAnnounce - supernode announces itself, to be broadcasted on p2p network
 Request URI:
-```
+```ruby
 /json_rpc/rta
 ```
 Request payload:
-```
+```ruby
 {
     "json_rpc" : "2.0",
     "method" : "send_supernode_announce",
@@ -772,7 +776,7 @@ Request payload:
 }
 ```
 Normal Response payload:
-```
+```ruby
 {
     "jsonrpc": "2.0",
     "id": "0",
@@ -782,7 +786,7 @@ Normal Response payload:
 }
 ```
 Error response payload:
-```
+```ruby
 {
     "id": "0",
     "jsonrpc": "2.0",
@@ -791,11 +795,12 @@ Error response payload:
         "message": "message"
     }
 }
-
+```
 ## 4. P2P messages
-COMMAND_SUPERNODE_ANNOUNCE - broadcase message, supernode announces itself for the network
 
-struct COMMAND_SUPERNODE_ANNOUNCE
+### 4.1 COMMAND_SUPERNODE_ANNOUNCE - broadcase message, supernode announces itself for the network
+```ruby
+struct COMMAND_SUPERNODE_ANNOUNCE:
 {
       const static int ID = P2P_COMMANDS_POOL_BASE + 20;
  
@@ -815,9 +820,8 @@ struct COMMAND_SUPERNODE_ANNOUNCE
       struct response : public cryptonote::COMMAND_RPC_SUPERNODE_ANNOUNCE::response { };
 };
 ```
-
-COMMAND_BROADCAST - broadcasted message
-```
+### 4.2 COMMAND_BROADCAST - broadcasted message:
+```ruby
 struct COMMAND_BROADCAST
 {
       const static int ID = P2P_COMMANDS_POOL_BASE + 21;
@@ -840,9 +844,8 @@ struct COMMAND_BROADCAST
       struct response : public cryptonote::COMMAND_RPC_BROADCAST::response { };
 };
 ```
-
-COMMAND_MULTICAST - message to the group of destinations
-```
+### 4.3 COMMAND_MULTICAST - message to the group of destinations:
+```ruby
 struct COMMAND_MULTICAST
 {
       const static int ID = P2P_COMMANDS_POOL_BASE + 22;
@@ -866,8 +869,8 @@ struct COMMAND_MULTICAST
       struct response : public cryptonote::COMMAND_RPC_MULTICAST::response { };
 };
 ```
-COMMAND_UNICAST - direct message to the specific destination
-```
+### 4.4 COMMAND_UNICAST - direct message to the specific destination:
+```ruby
 struct COMMAND_UNICAST
 {
       const static int ID = P2P_COMMANDS_POOL_BASE + 23;
