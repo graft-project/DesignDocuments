@@ -1,17 +1,12 @@
 # Supernode RTA and Cryptonode RTA APIs
 1.[Supernode Core Interfaces](#supernode-core-interfaces)
 
-    1.1 [GetPaymentData - return payment data for given payment id, block number, block hash](#getpaymentdata-return-payment-data-for-given-payment-id,-block-number,-block-hash)
-  
-    1.2 [StorePaymentData - handles payment multicast and stores payment data. Called by Cryptonode to it's connected supernode](#storepaymentdata-handles-payment-multicast-and-stores-payment-data.-Called-by-Cryptonode-to-it's-connected-supernode)
-   
-    1.3 [AuthorizeRtaTx - process incoming RTA Tx authorization  (handled by auth sample, PoS Proxy and Wallet Proxy)](#authorizertatx-process-incoming-rta-tx-authorization-(handled-by-auth-sample,-pos-proxy-and-wallet-proxy))
-
-    1.4 [UpdatePaymentStatus - handles broadcast with payment status update](#updatepaymentstatus-handles-broadcast-with-payment-status-update)
-
-    1.5 [GetAuthSample - returns auth sample for given payment id and block number](#getauthsample-returns-auth-sample-for-given-payment-id-and-block-number)
-
-    1.6 [GetSupernodeList - returns list of valid or all known supernodes](#getsupernodelist-returns-list-of-valid-or-all-known-supernodes)
+   1.1 [GetPaymentData - return payment data for given payment id, block number, block hash](#getpaymentdata-return-payment-data-for-given-payment-id,-block-number,-block-hash)
+   1.2 [StorePaymentData - handles payment multicast and stores payment data. Called by Cryptonode to it's connected supernode](#storepaymentdata-handles-payment-multicast-and-stores-payment-data.-Called-by-Cryptonode-to-it's-connected-supernode)
+   1.3 [AuthorizeRtaTx - process incoming RTA Tx authorization  (handled by auth sample, PoS Proxy and Wallet Proxy)](#authorizertatx-process-incoming-rta-tx-authorization-(handled-by-auth-sample,-pos-proxy-and-wallet-proxy))
+   1.4 [UpdatePaymentStatus - handles broadcast with payment status update](#updatepaymentstatus-handles-broadcast-with-payment-status-update)
+   1.5 [GetAuthSample - returns auth sample for given payment id and block number](#getauthsample-returns-auth-sample-for-given-payment-id-and-block-number)
+   1.6 [GetSupernodeList - returns list of valid or all known supernodes](#getsupernodelist-returns-list-of-valid-or-all-known-supernodes)
 
 2. [Pos/Wallet Interfaces](#pos/wallet-interfaces)
    
