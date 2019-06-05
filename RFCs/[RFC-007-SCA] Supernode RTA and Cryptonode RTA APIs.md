@@ -1,6 +1,6 @@
 # Supernode RTA and Cryptonode RTA APIs
 
-1. [Supernode Core Interfaces](#supernode-core-interfaces)
+[Supernode Core Interfaces](#supernode-core-interfaces)
 
     1.1 [GetPaymentData - return payment data for given payment id, block number, block hash](#getpaymentdata-return-payment-data-for-given-payment-id,-block-number,-block-hash)
    
@@ -46,7 +46,7 @@
    
     4.4 [COMMAND_UNICAST - direct message to the specific destination](#command_unicast-direct-message-to-the-specific-destination)
 
-## 1. Supernode Core Interfaces
+## Supernode Core Interfaces
 
 
 ### 1.1 GetPaymentData - return payment data for given payment id, block number, block hash
