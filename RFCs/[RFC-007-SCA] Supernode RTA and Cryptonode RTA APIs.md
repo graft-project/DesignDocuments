@@ -38,13 +38,13 @@
 
 [P2P messages](#P2P-messages)
    
-- [COMMAND_SUPERNODE_ANNOUNCE - broadcase message and supernode announces itself for the network](#command-_-supernode-_-announce---broadcase-message-and-supernode-announces-itself-for-the-network)
+- [COMMAND SUPERNODE ANNOUNCE - broadcase message and supernode announces itself for the network](#command-supernode-announce---broadcase-message-and-supernode-announces-itself-for-the-network)
    
-- [COMMAND_BROADCAST - broadcasted message](#command-_-broadcast---broadcasted-message)
+- [COMMAND BROADCAST - broadcasted message](#command-broadcast---broadcasted-message)
    
-- [COMMAND_MULTICAST - message to the group of destinations](#command-_-multicast---message-to-the-group-of-destinations)
+- [COMMAND MULTICAST - message to the group of destinations](#command-multicast---message-to-the-group-of-destinations)
    
-- [COMMAND_UNICAST - direct message to the specific destination](#command-_-unicast---direct-message-to-the-specific-destination)
+- [COMMAND_UNICAST - direct message to the specific destination](#command_unicast---direct-message-to-the-specific-destination)
 
 ## Supernode Core Interfaces
 
@@ -810,7 +810,7 @@ Error response payload:
 ```
 ## P2P messages
 
-### COMMAND_SUPERNODE_ANNOUNCE - broadcase message and supernode announces itself for the network
+### COMMAND SUPERNODE_ANNOUNCE - broadcase message and supernode announces itself for the network
 ```ruby
 struct COMMAND_SUPERNODE_ANNOUNCE:
 {
@@ -832,7 +832,7 @@ struct COMMAND_SUPERNODE_ANNOUNCE:
       struct response : public cryptonote::COMMAND_RPC_SUPERNODE_ANNOUNCE::response { };
 };
 ```
-### COMMAND_BROADCAST - broadcasted message
+### COMMAND BROADCAST - broadcasted message
 ```ruby
 struct COMMAND_BROADCAST
 {
@@ -856,7 +856,7 @@ struct COMMAND_BROADCAST
       struct response : public cryptonote::COMMAND_RPC_BROADCAST::response { };
 };
 ```
-### COMMAND_MULTICAST - message to the group of destinations
+### COMMAND MULTICAST - message to the group of destinations
 ```ruby
 struct COMMAND_MULTICAST
 {
