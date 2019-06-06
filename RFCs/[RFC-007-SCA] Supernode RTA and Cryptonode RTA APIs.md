@@ -14,7 +14,7 @@
    
 - [GetSupernodeList - returns list of valid or all known supernodes](#getsupernodelist-returns-list-of-valid-or-all-known-supernodes)
 
-[Pos/Wallet Interfaces](#pos/wallet-interfaces)
+[Pos&Wallet Interfaces](#pos&wallet-interfaces)
    
 - [Presale - supernode returns auth sample for given payment id. Called by PoS](#presale-supernode-returns-auth-sample-for-given-payment-id.-сalled-by-pos)
 
@@ -362,7 +362,7 @@ Response body:
     "message": "Error description"
 }
 ```
-## Pos/Wallet Interfaces
+## Pos&Wallet Interfaces
 
 ### Presale - supernode returns auth sample for given payment id. Called by PoS
 
