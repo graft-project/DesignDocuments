@@ -49,7 +49,7 @@
 ## Supernode Core Interfaces
 
 
-### GetPaymentData - return payment data for given payment id, block number, block hash
+### GetPaymentData - return payment data for given payment id and block number and block hash
 Input:
 
 - PaymentID - globally unique payment id
