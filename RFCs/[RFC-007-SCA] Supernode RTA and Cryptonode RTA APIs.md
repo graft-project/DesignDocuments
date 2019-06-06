@@ -119,7 +119,8 @@ Response body:
     "message": "Error description"
 }
 ```
-### StorePaymentData - handles payment multicast and stores payment data. Called by Cryptonode to it's connected supernode.
+### StorePaymentData - handles payment multicast and stores payment data
+### Called by Cryptonode to it's connected supernode.
 
 Input:
 - PaymentID - globally unique payment id
