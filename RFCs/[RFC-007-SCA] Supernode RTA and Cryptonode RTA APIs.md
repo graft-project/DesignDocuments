@@ -2,49 +2,49 @@
 
 [Supernode Core Interfaces](#supernode-core-interfaces)
 
-- [GetPaymentData - return payment data for given payment id, block number, block hash](#getpaymentdata-return-payment-data-for-given-payment-id,-block-number,-block-hash)
+- [GetPaymentData - return payment data for given payment id, block number, block hash](#getpaymentdata---return-payment-data-for-given-payment-id-,-block-number-,-block-hash)
    
-- [StorePaymentData - handles payment multicast and stores payment data](#storepaymentdata---handles-payment-multicast-and-stores-payment-data)
+- [StorePaymentData - handles payment multicast and stores payment data. ](#storepaymentdata---handles-payment-multicast-and-stores-payment-data)
    
-- [AuthorizeRtaTx - process incoming RTA Tx authorization  (handled by auth sample, PoS Proxy and Wallet Proxy)](#authorizertatx-process-incoming-rta-tx-authorization-(handled-by-auth-sample,-pos-proxy-and-wallet-proxy))
+- [AuthorizeRtaTx - process incoming RTA Tx authorization  (handled by auth sample, PoS Proxy and Wallet Proxy)](#authorizertatx---process-incoming-rta-tx-authorization-(-handled-by-auth-sample-,-pos-proxy-and-wallet-proxy-))
    
-- [UpdatePaymentStatus - handles broadcast with payment status update](#updatepaymentstatus-handles-broadcast-with-payment-status-update)
+- [UpdatePaymentStatus - handles broadcast with payment status update](#updatepaymentstatus---handles-broadcast-with-payment-status-update)
    
-- [GetAuthSample - returns auth sample for given payment id and block number](#getauthsample-returns-auth-sample-for-given-payment-id-and-block-number)
+- [GetAuthSample - returns auth sample for given payment id and block number](#getauthsample---returns-auth-sample-for-given-payment-id-and-block-number)
    
-- [GetSupernodeList - returns list of valid or all known supernodes](#getsupernodelist-returns-list-of-valid-or-all-known-supernodes)
+- [GetSupernodeList - returns list of valid or all known supernodes](#getsupernodelist---returns-list-of-valid-or-all-known-supernodes)
 
 [PoS and Wallet Interfaces](#pos-and-wallet-interfaces)
    
-- [Presale - supernode returns auth sample for given payment id. Called by PoS](#presale-supernode-returns-auth-sample-for-given-payment-id.-сalled-by-pos)
+- [Presale - supernode returns auth sample for given payment id. Called by PoS](#presale---supernode-returns-auth-sample-for-given-payment-id-.-сalled-by-pos)
 
-- [Sale - process sale. Сalled by PoS](#sale-process-sale.-called-by-pos)
+- [Sale - process sale. Сalled by PoS](#sale-process-sale-.-called-by-pos)
 
-- [GetPaymentData - returns payment data for given payment id, block number, block hash. Called by PoS or Wallet](#getpaymentdata-returns-payment-data-for-given-payment-id-block-number-block-hash.-called-by-pos-or-wallet)
+- [GetPaymentData - returns payment data for given payment id, block number, block hash. Called by PoS or Wallet](#getpaymentdata---returns-payment-data-for-given-payment-id-block-number-block-hash-.-called-by-pos-or-wallet)
 
-- [Pay - process payment. Called by Wallet](#pay-process-payment.-called-by-wallet)
+- [Pay - process payment. Called by Wallet](#pay---process-payment-.-called-by-wallet)
    
-- [GetPaymentStatus - returns payment status for given payment id](#getpaymentstatus-returns-payment-status-for-given-payment-id)
+- [GetPaymentStatus - returns payment status for given payment id](#getpaymentstatus---returns-payment-status-for-given-payment-id)
 
-[JSON-RPC interfaces on cryptonode side to communicate with supernode](#json-rpc-interfaces-on-cryptonode-side-to-communicate-with-supernode)
+[JSON-RPC interfaces on cryptonode side to communicate with supernode](#json---rpc-interfaces-on-cryptonode-side-to-communicate-with-supernode)
 
-- [Broadcast - broadcasts message  to all the network](#broadcast-broadcasts-message-to-all-the-network)
+- [Broadcast - broadcasts message  to all the network](#broadcast---broadcasts-message-to-all-the-network)
 
-- [Multicast - sends message to the group of supernodes](#multicast-sends-message-to-the-group-of-supernodes)
+- [Multicast - sends message to the group of supernodes](#multicast---sends-message-to-the-group-of-supernodes)
 
-- [Unicast - sends direct message to the specific supernode](#unicast-sends-direct-message-to-the-specific-supernode)
+- [Unicast - sends direct message to the specific supernode](#unicast---sends-direct-message-to-the-specific-supernode)
    
-- [SendSupernodeAnnounce - supernode announces itself, to be broadcasted on p2p network](#sendsupernodeannounce-supernode-announces-itself-to-be-broadcasted-on-p2p-network)
+- [SendSupernodeAnnounce - supernode announces itself, to be broadcasted on p2p network](#sendsupernodeannounce---supernode-announces-itself-,-to-be-broadcasted-on-p2p-network)
 
 [P2P messages](#P2P-messages)
    
-- [COMMAND_SUPERNODE_ANNOUNCE - broadcase message, supernode announces itself for the network](#command_supernode_announce-broadcase-message,-supernode-announces-itself-for-the-network)
+- [COMMAND_SUPERNODE_ANNOUNCE - broadcase message, supernode announces itself for the network](#command-_-supernode-_-announce---broadcase-message-,-supernode-announces-itself-for-the-network)
    
-- [COMMAND_BROADCAST - broadcasted message](#command_broadcast-broadcasted-message)
+- [COMMAND_BROADCAST - broadcasted message](#command-_-broadcast---broadcasted-message)
    
-- [COMMAND_MULTICAST - message to the group of destinations](#command_multicast-message-to-the-group-of-destinations)
+- [COMMAND_MULTICAST - message to the group of destinations](#command-_-multicast---message-to-the-group-of-destinations)
    
-- [COMMAND_UNICAST - direct message to the specific destination](#command_unicast-direct-message-to-the-specific-destination)
+- [COMMAND_UNICAST - direct message to the specific destination](#command-_-unicast---direct-message-to-the-specific-destination)
 
 ## Supernode Core Interfaces
 
@@ -119,8 +119,7 @@ Response body:
     "message": "Error description"
 }
 ```
-### StorePaymentData - handles payment multicast and stores payment data
-### Called by Cryptonode to it's connected supernode.
+### StorePaymentData - handles payment multicast and stores payment data. Called by Cryptonode to it's connected supernode
 
 Input:
 - PaymentID - globally unique payment id
