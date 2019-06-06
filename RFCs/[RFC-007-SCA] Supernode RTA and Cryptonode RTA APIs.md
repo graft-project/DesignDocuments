@@ -18,7 +18,7 @@
    
 - [Presale - supernode returns auth sample for given payment id](#presale---supernode-returns-auth-sample-for-given-payment-id)
 
-- [Sale - process sale](#sale-process-sale)
+- [Sale - process sale](#sale---process-sale)
 
 - [GetPaymentData - returns payment data for given payment id and block number and block hash](#getpaymentdata---returns-payment-data-for-given-payment-id-and-block-number-and-block-hash)
 
@@ -26,19 +26,19 @@
    
 - [GetPaymentStatus - returns payment status for given payment id](#getpaymentstatus---returns-payment-status-for-given-payment-id)
 
-[JSON - RPC interfaces on cryptonode side to communicate with supernode](#json-rpc-interfaces-on-cryptonode-side-to-communicate-with-supernode)
+[JSON - RPC interfaces on cryptonode side to communicate with supernode](#json---rpc-interfaces-on-cryptonode-side-to-communicate-with-supernode)
 
-- [Broadcast - broadcasts message  to all the network](#broadcast---broadcasts-message-to-all-the-network)
+- [Broadcast - broadcasts message to all the network](#broadcast---broadcasts-message-to-all-the-network)
 
 - [Multicast - sends message to the group of supernodes](#multicast---sends-message-to-the-group-of-supernodes)
 
 - [Unicast - sends direct message to the specific supernode](#unicast---sends-direct-message-to-the-specific-supernode)
    
-- [SendSupernodeAnnounce - supernode announces itself, to be broadcasted on p2p network](#sendsupernodeannounce---supernode-announces-itself-,-to-be-broadcasted-on-p2p-network)
+- [SendSupernodeAnnounce - supernode announces itself to be broadcasted on p2p network](#sendsupernodeannounce---supernode-announces-itself-to-be-broadcasted-on-p2p-network)
 
 [P2P messages](#P2P-messages)
    
-- [COMMAND_SUPERNODE_ANNOUNCE - broadcase message, supernode announces itself for the network](#command-_-supernode-_-announce---broadcase-message-,-supernode-announces-itself-for-the-network)
+- [COMMAND_SUPERNODE_ANNOUNCE - broadcase message and supernode announces itself for the network](#command-_-supernode-_-announce---broadcase-message-and-supernode-announces-itself-for-the-network)
    
 - [COMMAND_BROADCAST - broadcasted message](#command-_-broadcast---broadcasted-message)
    
@@ -767,7 +767,7 @@ Error response payload:
     }
 }
 ```
-### SendSupernodeAnnounce - supernode announces itself, to be broadcasted on p2p network
+### SendSupernodeAnnounce - supernode announces itself to be broadcasted on p2p network
 Request URI:
 ```ruby
 /json_rpc/rta
@@ -810,7 +810,7 @@ Error response payload:
 ```
 ## P2P messages
 
-### COMMAND_SUPERNODE_ANNOUNCE - broadcase message, supernode announces itself for the network
+### COMMAND_SUPERNODE_ANNOUNCE - broadcase message and supernode announces itself for the network
 ```ruby
 struct COMMAND_SUPERNODE_ANNOUNCE:
 {
@@ -832,7 +832,7 @@ struct COMMAND_SUPERNODE_ANNOUNCE:
       struct response : public cryptonote::COMMAND_RPC_SUPERNODE_ANNOUNCE::response { };
 };
 ```
-### COMMAND_BROADCAST - broadcasted message:
+### COMMAND_BROADCAST - broadcasted message
 ```ruby
 struct COMMAND_BROADCAST
 {
@@ -856,7 +856,7 @@ struct COMMAND_BROADCAST
       struct response : public cryptonote::COMMAND_RPC_BROADCAST::response { };
 };
 ```
-### COMMAND_MULTICAST - message to the group of destinations:
+### COMMAND_MULTICAST - message to the group of destinations
 ```ruby
 struct COMMAND_MULTICAST
 {
@@ -881,7 +881,7 @@ struct COMMAND_MULTICAST
       struct response : public cryptonote::COMMAND_RPC_MULTICAST::response { };
 };
 ```
-### COMMAND_UNICAST - direct message to the specific destination:
+### COMMAND_UNICAST - direct message to the specific destination
 ```ruby
 struct COMMAND_UNICAST
 {
