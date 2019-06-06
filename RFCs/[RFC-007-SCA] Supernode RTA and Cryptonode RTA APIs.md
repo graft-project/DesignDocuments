@@ -38,11 +38,11 @@
 
 [P2P messages](#P2P-messages)
    
-- [COMMAND SUPERNODE ANNOUNCE - broadcase message and supernode announces itself for the network](#command-supernode-announce---broadcase-message-and-supernode-announces-itself-for-the-network)
+- [COMMAND_SUPERNODE_ANNOUNCE - broadcase message and supernode announces itself for the network](#command_supernode_announce---broadcase-message-and-supernode-announces-itself-for-the-network)
    
-- [COMMAND BROADCAST - broadcasted message](#command-broadcast---broadcasted-message)
+- [COMMAND_BROADCAST - broadcasted message](#command_broadcast---broadcasted-message)
    
-- [COMMAND MULTICAST - message to the group of destinations](#command-multicast---message-to-the-group-of-destinations)
+- [COMMAND_MULTICAST - message to the group of destinations](#command_multicast---message-to-the-group-of-destinations)
    
 - [COMMAND_UNICAST - direct message to the specific destination](#command_unicast---direct-message-to-the-specific-destination)
 
@@ -810,7 +810,7 @@ Error response payload:
 ```
 ## P2P messages
 
-### COMMAND SUPERNODE_ANNOUNCE - broadcase message and supernode announces itself for the network
+### COMMAND_SUPERNODE_ANNOUNCE - broadcase message and supernode announces itself for the network
 ```ruby
 struct COMMAND_SUPERNODE_ANNOUNCE:
 {
@@ -832,7 +832,7 @@ struct COMMAND_SUPERNODE_ANNOUNCE:
       struct response : public cryptonote::COMMAND_RPC_SUPERNODE_ANNOUNCE::response { };
 };
 ```
-### COMMAND BROADCAST - broadcasted message
+### COMMAND_BROADCAST - broadcasted message
 ```ruby
 struct COMMAND_BROADCAST
 {
@@ -856,7 +856,7 @@ struct COMMAND_BROADCAST
       struct response : public cryptonote::COMMAND_RPC_BROADCAST::response { };
 };
 ```
-### COMMAND MULTICAST - message to the group of destinations
+### COMMAND_MULTICAST - message to the group of destinations
 ```ruby
 struct COMMAND_MULTICAST
 {
