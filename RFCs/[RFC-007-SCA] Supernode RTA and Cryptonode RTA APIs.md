@@ -26,7 +26,7 @@
    
 - [GetPaymentStatus - returns payment status for given payment id](#getpaymentstatus---returns-payment-status-for-given-payment-id)
 
-[JSON-RPC interfaces on cryptonode side to communicate with supernode](#json-rpc-interfaces-on-cryptonode-side-to-communicate-with-supernode)
+[JSON - RPC interfaces on cryptonode side to communicate with supernode](#json-rpc-interfaces-on-cryptonode-side-to-communicate-with-supernode)
 
 - [Broadcast - broadcasts message  to all the network](#broadcast---broadcasts-message-to-all-the-network)
 
@@ -119,7 +119,9 @@ Response body:
     "message": "Error description"
 }
 ```
-### StorePaymentData - handles payment multicast and stores payment data. Called by Cryptonode to it's connected supernode
+### StorePaymentData - handles payment multicast and stores payment data
+
+**Called by Cryptonode to it's connected supernode**
 
 Input:
 - PaymentID - globally unique payment id
@@ -177,7 +179,9 @@ Response body:
     "message": "Error description"
 }
 ```
-### AuthorizeRtaTx - process incoming RTA Tx authorization  (handled by auth sample, PoS Proxy and Wallet Proxy)
+### AuthorizeRtaTx - process incoming RTA Tx authorization  
+
+**(handled by auth sample, PoS Proxy and Wallet Proxy)**
 
 Input:
 
@@ -364,7 +368,9 @@ Response body:
 ```
 ## Pos and Wallet Interfaces
 
-### Presale - supernode returns auth sample for given payment id. Called by PoS
+### Presale - supernode returns auth sample for given payment id
+
+**Called by PoS**
 
 Input:
 - PaymentID - randomly generated string (TODO: define what is the form of the string - e.g. GUID, some fixed size hexadecimal/base64/base58 etc)
@@ -423,7 +429,9 @@ Response body:
 }
 ```
 
-### Sale - process sale. Сalled by PoS
+### Sale - process sale
+
+**Сalled by PoS**
 
 Input:
 - PaymentData - encrypted payment data blob (list of items, amounts, any other info)
@@ -473,7 +481,9 @@ Response body:
     "message": "Error description"
 }
 ```
-### GetPaymentData - returns payment data for given payment id, block number, block hash. Called by PoS or Wallet
+### GetPaymentData - returns payment data for given payment id and block number and block hash
+
+**Called by PoS or Wallet**
 
 Input:
 
@@ -546,7 +556,9 @@ Response body:
 }
 ```
 
-### Pay - process payment. Called by Wallet
+### Pay - process payment
+
+**Called by Wallet**
 
 Input:
 
@@ -629,9 +641,9 @@ Response body:
     "message": "Error description"
 }
 ```
-## JSON-RPC interfaces on cryptonode side to communicate with supernode
+## JSON - RPC interfaces on cryptonode side to communicate with supernode
 
-### Broadcast - broadcasts message  to all the network
+### Broadcast - broadcasts message to all the network
 
 This call will be called by supernode in case sale details with given payment id wasn't found in local supernode (supernode handling "sale_details" call from wallet)
 
