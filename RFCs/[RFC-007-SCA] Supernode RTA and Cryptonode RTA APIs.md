@@ -2,11 +2,11 @@
 
 [Supernode Core Interfaces](#supernode-core-interfaces)
 
-- [GetPaymentData - return payment data for given payment id, block number, block hash](#getpaymentdata---return-payment-data-for-given-payment-id-,-block-number-,-block-hash)
+- [GetPaymentData - return payment data for given payment id and block number and block hash](#getpaymentdata---return-payment-data-for-given-payment-id-and-block-number-and-block-hash)
    
-- [StorePaymentData - handles payment multicast and stores payment data. ](#storepaymentdata---handles-payment-multicast-and-stores-payment-data)
+- [StorePaymentData - handles payment multicast and stores payment data](#storepaymentdata---handles-payment-multicast-and-stores-payment-data)
    
-- [AuthorizeRtaTx - process incoming RTA Tx authorization  (handled by auth sample, PoS Proxy and Wallet Proxy)](#authorizertatx---process-incoming-rta-tx-authorization-(-handled-by-auth-sample-,-pos-proxy-and-wallet-proxy-))
+- [AuthorizeRtaTx - process incoming RTA Tx authorization](#authorizertatx---process-incoming-rta-tx-authorization)
    
 - [UpdatePaymentStatus - handles broadcast with payment status update](#updatepaymentstatus---handles-broadcast-with-payment-status-update)
    
@@ -16,17 +16,17 @@
 
 [PoS and Wallet Interfaces](#pos-and-wallet-interfaces)
    
-- [Presale - supernode returns auth sample for given payment id. Called by PoS](#presale---supernode-returns-auth-sample-for-given-payment-id-.-сalled-by-pos)
+- [Presale - supernode returns auth sample for given payment id](#presale---supernode-returns-auth-sample-for-given-payment-id)
 
-- [Sale - process sale. Сalled by PoS](#sale-process-sale-.-called-by-pos)
+- [Sale - process sale](#sale-process-sale)
 
-- [GetPaymentData - returns payment data for given payment id, block number, block hash. Called by PoS or Wallet](#getpaymentdata---returns-payment-data-for-given-payment-id-block-number-block-hash-.-called-by-pos-or-wallet)
+- [GetPaymentData - returns payment data for given payment id and block number and block hash](#getpaymentdata---returns-payment-data-for-given-payment-id-and-block-number-and-block-hash)
 
-- [Pay - process payment. Called by Wallet](#pay---process-payment-.-called-by-wallet)
+- [Pay - process payment](#pay---process-payment)
    
 - [GetPaymentStatus - returns payment status for given payment id](#getpaymentstatus---returns-payment-status-for-given-payment-id)
 
-[JSON-RPC interfaces on cryptonode side to communicate with supernode](#json---rpc-interfaces-on-cryptonode-side-to-communicate-with-supernode)
+[JSON-RPC interfaces on cryptonode side to communicate with supernode](#json-rpc-interfaces-on-cryptonode-side-to-communicate-with-supernode)
 
 - [Broadcast - broadcasts message  to all the network](#broadcast---broadcasts-message-to-all-the-network)
 
