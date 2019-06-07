@@ -16,6 +16,6 @@
 > _if the sufficient progress is not being made according to the established timelines, the core dev team is free to select another project / team._
 - Developer submits the task as pull request
 - The task has to pass the agreed upon acceptance criteria and unit tests 
-- Community and the core team reviews the change
+- Community and the core team review the change
 - Award is distributed
 
