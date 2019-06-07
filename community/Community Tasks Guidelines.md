@@ -1,12 +1,12 @@
 # Community Tasks Guidelines
 
-Interested devs should submit a proposal for the task by the submit date with the following information:
-Brief description of the task implementation plan including milestones for larger tasks
-Proposed timeline
-Acceptance of the reward or counter-proposal
-All tasks are expected to be accompanied by the unit tests.  Unit tests should be written ahead of the implementation, following the design phase
-The design of implementation is discussed and approved by the technical committee on the task
-TC and core team reserve the right to stop work and reassign the task if they feel that the place or direction of task progress is insufficient to meet the requirements or the deadlines
+- Interested devs should submit a proposal for the task by the submit date with the following information:
+  - Brief description of the task implementation plan including milestones for larger tasks
+  - Proposed timeline
+  - Acceptance of the reward or counter-proposal
+- All tasks are expected to be accompanied by the unit tests.  Unit tests should be written ahead of the implementation, following the design phase
+- The design of implementation is discussed and approved by the technical committee on the task
+- TC and core team reserve the right to stop work and reassign the task if they feel that the place or direction of task progress is insufficient to meet the requirements or the deadlines
 
 ## Process
 - Developers or teams submit proposals by the “submit by” date
