@@ -19,7 +19,7 @@
 
 ## Qualification Set
 
-**Qualification Set** is a set of SNs that is a subset of another set **Blockchain-based List (BBL)**. BBL is is a list of all SNs with valid stakes for particular height of the blockchain. Qualification Set is generated randomly, but deterministically from another subset such that any participant can generate the same subset and check that entities really in the subset.
+**Qualification Set** is a set of SNs that is a subset of **Blockchain-based List (BBL)**. BBL is a list of all SNs with stakes valid for particular height of the blockchain. Qualification Set is generated randomly, but deterministically, such that any participant can generate the same subset and check that entities indeed are in the subset.
 
 ## Qualification Sample
 
@@ -27,9 +27,9 @@
 
 There are two types of SN qualifications:
 
-*   **Authorization Qualification**. It based on **Authorization Qualification Sample (AuthS)**, a Qualification Sample that effectively is the currently active authorization sample. Its purpose is to filter out supernodes from the authorization sample that did not satisfy the authorization sample requirements. AuthS is exactly the same as Auth Sample that participate in a RTA transaction. AuthS is generated basing on RTA payment ID, and BBL which itself depends on current blockchain height and state of stakes for that height. SNs that make decisions of qualifications and those to be qualified, both mush be in AuthS.
+*   **Authorization Qualification**. It based on **Authorization Qualification Sample (AuthS)**, a Qualification Sample that effectively is the currently active authorization sample. Its purpose is to filter out supernodes that did not satisfy the authorization sample requirements from the authorization sample. AuthS is generated basing on RTA payment ID, and BBL which itself depends on current blockchain height and state of stakes for that height. SNs that make decisions of qualifications and those to be qualified, both mush be in AuthS.
 
-*   **Blockchain-based Qualification**. It uses two Qualification Sets: **Qualification Candidate List (QCL)** SNs that are checked to be qualified, and **Blockchain-based Qualification Sample (BBQS)** SNs that make descisions about qualifications. Both QCL and BBQS are generated from current BBL. The decision is driven by activity proof from a SN in QCL. Supernodes that haven't sent the proof to those in BBQS should be disqualified from participation in authorization samples over a number of blocks.
+*   **Blockchain-based Qualification**. It uses two Qualification Sets: **Qualification Candidate List (QCL)**, SNs are checked to be verified, and **Blockchain-based Qualification Sample (BBQS)** SNs that make descisions about qualifications. Both QCL and BBQS are generated from current BBL. The decision is driven by proof of  activity of a SN in QCL. Supernodes that haven't sent the proof to those in BBQS should be disqualified from participation in authorization samples over a number of blocks.
 
 ## Disqualification Transaction
 
@@ -39,9 +39,9 @@ participation in authorizations. The **disqualification transaction** has the fo
 1. The transaction cannot contain any key images.
 2. The transaction has zero mining fee.
 3. Field **transaction_extra** of the transaction must contain: 
-    1. At least one value or list of public identification keys of supernodes to be disqualified.
+    1. One or more values of public identification keys of supernodes to be disqualified.
     2. Data for validating qualification sample such as current blockchain height and hash. This data can vary depending on the qualification sample which generates **_disqualification transaction_**.
-    3. List of public identification keys of supernodes from the qualification sample voted for disqualification and their signatures of the data in 1. and 2.. The signature signs by supernode private identification key.
+    3. List of public identification keys of supernodes in the qualification sample, voted for disqualification and their signatures of the data in 1. and 2.. The data is signed by supernode private identification key.
 
 ## Disqualification Transaction Validation
 
@@ -51,8 +51,7 @@ To validate the disqualification transaction, each supernode which participates 
 
 *   check if the disqualification transaction contains key images. If the disqualification transaction contains key images, it 
 should be rejected.
-*   check if the disqualification transaction is the zero-fee transaction. If the disqualification transaction isn't a zero-fee 
-transaction, it should be rejected.
+*   check if the disqualification transaction is the zero-fee transaction. If the disqualification transaction isn't a zero-fee transaction, it should be rejected.
 *   check correctness of the data for validation qualification sample. If data is incorrect, the disqualification transaction should 
 be rejected.
 *   check correctness of qualification supernodes added to the transaction. For this, supernode should
