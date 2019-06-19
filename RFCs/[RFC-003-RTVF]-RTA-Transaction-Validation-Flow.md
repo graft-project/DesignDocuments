@@ -8,8 +8,25 @@
 |------------|-------------|
 | 01/09/2019 | 0.1         |
 | 01/18/2019 | 0.2         |
+| 06/18/2019 | 0.3         |
 
 ***
+ [Validation Flow Sequence Diagram](#validation_flow_sequence_diagram)
+ 
+1 [RTA Transaction](#rta_transaction)
+
+2 [RTA Transaction Validation](#[rta_transaction_validation])
+
+  2.1 [RTA Transaction Validation by PoS](#rta_transaction_validation_by_pos)
+  
+  2.2 RTA Transaction Validation by Auth Sample Supernode
+  
+  2.3 RTA Transaction Validation by Proxy Supernodes
+  
+  2.4 Blockchain RTA Transaction Validation
+  
+3 Validation Flow Description
+
 
 ## Validation Flow Sequence Diagram
 
@@ -17,14 +34,17 @@
 
 > **Open Issue**
 >
-> **Fake Transaction Protection for RTA Validation**: We should guarantee that user cannot submit the regular transaction with the same tx key images as in RTA transaction (potential double-spent) in pre-mined blocks after successful RTA validation to double-spent RTA transaction. The best solution at this moment is lock regular transaction and validate all transactions through auth sample.
+> - **Fake Transaction Protection for RTA Validation**: We should guarantee that user cannot submit the regular transaction with the same tx key images as in RTA transaction (potential double-spent) in pre-mined blocks after successful RTA validation to double-spent RTA transaction. The best solution at this moment is lock regular transaction and validate all transactions through auth sample.
+> - **RTA transaction containing more than one Graft transactions**
 
 ## RTA Transaction
 RTA Transaction is an extended version of the regular transaction which requires RTA validation by PoS, authorization sample and proxy supernodes (PoS and Wallet.) Since, in case of RTA validation, an additional fee is to be paid to authorization sample and proxy supernodes, RTA Transaction is always a multi-destination transaction, and transaction amount sent to PoS is calculated using the formula:
-```
+
+```ruby
 RtaTxAmount = FullTxAmount - ASSize * ASFee - PoSProxyFee - WalletProxyFee
 ```
 where **FullTxAmount** - full transaction amount, **ASSize** - Auth Sample Size - the number of supernodes in the authorization sample, **ASFee** - Auth Sample Fee - validation fee for one authorization supernode, **PoSProxyFee** - PoS Proxy Supernode Fee - service fee for PoS Proxy Supernode, and **WalletProxyFee** - Wallet Proxy Supernode Fee - service fee for Wallet Proxy Supernode. RTA transaction must include several additional data fields:
+
 * **RTA payment ID**, which identifies this payment in the Graft Network;
 * **PoS public one-time identification key**, required for RTA validation by PoS;
 * **Auth sample public identification keys**, required for RTA validation by auth sample supernodes;
@@ -36,7 +56,7 @@ Transaction private key must participate in RTA Transaction. However, in the sak
 RTA Transaction must be validated by PoS, authorization sample supernodes and proxy supernodes. During RTA validation all of them own different goals. PoS validates the amount of the transaction. Each auth sample supernode validates key images of RTA transaction (classical double-spent check) and the validation fee.
 PoS and Wallet Proxy Supernodes validate the service fee.
 
-## RTA Transaction Validation by PoS
+### RTA Transaction Validation by PoS
 When PoS receives RTA transaction data for RTA validation, it performs the following operations:
 1. Decrypts received RTA transaction data:
     1. Decrypts message key using its private one-time identification key.
