@@ -110,6 +110,7 @@ To validate RTA Transaction graftnode should perform several checks:
       > **TODO:** _Boris:_ I'm leaning towards trusting PoS proxy with respect to auth sample but use the PoS one-time identification keypair to enforce anonymity.
    
 >**Payment Block Definition**
+>
 >  **Payment block** is a historical block in the blockchain, which selected by the block number as a difference between current blockchain height and constant value, which determines the delay for increasing the stability of selected auth sample (Currently we use SVP). Formally,`payment_block_number = current_block_number - SVP`. Block defined by using its block number and block hash.
 
 2. When PoS got data from Proxy Supernode, it prepares and sends payment data (`/dapi/sale` endpoint):
@@ -120,6 +121,7 @@ To validate RTA Transaction graftnode should perform several checks:
  3. Proxy Supernode receives sale request from PoS and multicasts it to all supernodes in the auth sample. Supernodes in the auth sample decrypt this data using their private identification keys and store it using the RTA payment ID.
 
 >**Communication Message Encryption** 
+>
 >  **Communication Messages** (Unicast, Multicast and Broadcast) should be always signed by its sender. Sender field in the message should be set to the sender public identification key and the signature must be add in signature field in the message. The signature is generated using the sender private identification key.
 
 4. At the same moment, **PoS** generates QR code for Wallet including RTA payment ID, _PoS public address_, payment block number, payment block hash, _PoS public one-time identification key_ and PoS data encryption key into it.
