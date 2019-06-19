@@ -11,21 +11,21 @@
 | 06/18/2019 | 0.3         |
 
 ***
- [Validation Flow Sequence Diagram](#validation_flow_sequence_diagram)
+ [Validation Flow Sequence Diagram](#validation-flow-sequence-diagram)
  
-1 [RTA Transaction](#rta_transaction)
+1 [RTA Transaction](#rta-transaction)
 
-2 [RTA Transaction Validation](#[rta_transaction_validation])
+2 [RTA Transaction Validation](#[rta-transaction-validation])
 
-  2.1 [RTA Transaction Validation by PoS](#rta_transaction_validation_by_pos)
+  2.1 [RTA Transaction Validation by PoS](#rta-transaction-validation-by-pos)
   
-  2.2 RTA Transaction Validation by Auth Sample Supernode
+  2.2 [RTA Transaction Validation by Auth Sample Supernode](#rta-transaction-validation-by-auth-sample-supernode)
   
-  2.3 RTA Transaction Validation by Proxy Supernodes
+  2.3 [RTA Transaction Validation by Proxy Supernodes](#rta-transaction-validation-by-proxy-supernodes)
   
-  2.4 Blockchain RTA Transaction Validation
+  2.4 [Blockchain RTA Transaction Validation](#blockchain-rta-transaction-validation)
   
-3 Validation Flow Description
+3 [Validation Flow Description](#validation-flow-description)
 
 
 ## Validation Flow Sequence Diagram
@@ -59,27 +59,27 @@ PoS and Wallet Proxy Supernodes validate the service fee.
 ### RTA Transaction Validation by PoS
 When PoS receives RTA transaction data for RTA validation, it performs the following operations:
 1. Decrypts received RTA transaction data:
-    1. Decrypts message key using its private one-time identification key.
-    2. Decrypts RTA transaction and transaction private key using message key.
+   a. Decrypts message key using its private one-time identification key.
+   b. Decrypts RTA transaction and transaction private key using message key.
 2. Checks amount in the transaction, using transaction private key and PoS public wallet address based on [Monero Prove Payment Mechanism](https://www.getmonero.org/resources/user-guides/prove-payment.html).
 
-## RTA Transaction Validation by Auth Sample Supernode
+### RTA Transaction Validation by Auth Sample Supernode
 When a supernode in auth sample receives RTA transaction data for RTA validation, it performs the following operations:
 1. Decrypts received RTA transaction data:
-    1. Decrypts message key using its supernode private identification key.
-    2. Decrypts RTA transaction and transaction private key using message key.
+   a. Decrypts message key using its supernode private identification key.
+   b. Decrypts RTA transaction and transaction private key using message key.
 2. Checks correctness of selected auth sample using payment block hash and RTA payment ID.
 3. Validates transaction key images (double-spent check) in the blockchain, transaction pool and the list of currently processing RTA Transaction on supernode.
 4. Checks the validation fee using transaction private key and its supernode public wallet address based on [Monero Prove Payment Mechanism](https://www.getmonero.org/resources/user-guides/prove-payment.html).
 
-## RTA Transaction Validation by Proxy Supernodes
+### RTA Transaction Validation by Proxy Supernodes
 When PoS or Wallet Proxy Supernode receives RTA transaction data for RTA validation, it performs following operations:
 1. Decrypts received RTA transaction data:
-    1. Decrypts message key using PoS or Wallet Proxy Supernode private identification key.
-    2. Decrypts RTA transaction and transaction private key using message key.
+   a. Decrypts message key using PoS or Wallet Proxy Supernode private identification key.
+   b. Decrypts RTA transaction and transaction private key using message key.
 2. Checks the service fee, using transaction private key and proxy supernode public wallet address based on [Monero Prove Payment Mechanism](https://www.getmonero.org/resources/user-guides/prove-payment.html).
 
-## Blockchain RTA Transaction Validation
+### Blockchain RTA Transaction Validation
 To validate RTA Transaction graftnode should perform several checks:
 1. Checks correctness of auth sample for transaction validation. For this, graftnode gets Blockchain-based List and checks if selected auth sample supernodes listed in the transaction are eligible to participate in auth sample for this transaction.
 2. Checks PoS signature.
