@@ -60,18 +60,18 @@ PoS and Wallet Proxy Supernodes validate the service fee.
 When PoS receives RTA transaction data for RTA validation, it performs the following operations:
 1. Decrypts received RTA transaction data:
 
-   a. Decrypts message key using its private one-time identification key.
+   1. Decrypts message key using its private one-time identification key.
    
-   b. Decrypts RTA transaction and transaction private key using message key.
+   2. Decrypts RTA transaction and transaction private key using message key.
 2. Checks amount in the transaction, using transaction private key and PoS public wallet address based on [Monero Prove Payment Mechanism](https://www.getmonero.org/resources/user-guides/prove-payment.html).
 
 ### RTA Transaction Validation by Auth Sample Supernode
 When a supernode in auth sample receives RTA transaction data for RTA validation, it performs the following operations:
 1. Decrypts received RTA transaction data:
 
-   a. Decrypts message key using its supernode private identification key.
+   1. Decrypts message key using its supernode private identification key.
    
-   b. Decrypts RTA transaction and transaction private key using message key.
+   2. Decrypts RTA transaction and transaction private key using message key.
 2. Checks correctness of selected auth sample using payment block hash and RTA payment ID.
 3. Validates transaction key images (double-spent check) in the blockchain, transaction pool and the list of currently processing RTA Transaction on supernode.
 4. Checks the validation fee using transaction private key and its supernode public wallet address based on [Monero Prove Payment Mechanism](https://www.getmonero.org/resources/user-guides/prove-payment.html).
@@ -80,9 +80,9 @@ When a supernode in auth sample receives RTA transaction data for RTA validation
 When PoS or Wallet Proxy Supernode receives RTA transaction data for RTA validation, it performs following operations:
 1. Decrypts received RTA transaction data:
 
-   a. Decrypts message key using PoS or Wallet Proxy Supernode private identification key.
+   1. Decrypts message key using PoS or Wallet Proxy Supernode private identification key.
    
-   b. Decrypts RTA transaction and transaction private key using message key.
+   2. Decrypts RTA transaction and transaction private key using message key.
 2. Checks the service fee, using transaction private key and proxy supernode public wallet address based on [Monero Prove Payment Mechanism](https://www.getmonero.org/resources/user-guides/prove-payment.html).
 
 ### Blockchain RTA Transaction Validation
@@ -104,9 +104,10 @@ To validate RTA Transaction graftnode should perform several checks:
    3. and Auth Sample Data (8 pairs of the supernode public identification key and public wallet address, see [Selecting Auth Sample Supernode List](#https://github.com/graft-project/DesignDocuments/blob/master/RFCs/%5BRFC-002-SLS%5D-Supernode-List-Selection.md#selecting-auth-sample-list))
 
    4. Pos Proxy id and wallet address;
-   > **Note:** To validate the correctness of Auth Sample Data, PoS may ask it from different Proxy Supernodes
    
-   > **TODO:** _Boris:_ I'm leaning towards trusting PoS proxy with respect to auth sample but use the PoS one-time identification keypair to enforce anonymity.
+      > **Note:** To validate the correctness of Auth Sample Data, PoS may ask it from different Proxy Supernodes
+   
+      > **TODO:** _Boris:_ I'm leaning towards trusting PoS proxy with respect to auth sample but use the PoS one-time identification keypair to enforce anonymity.
    
 >**Payment block** is a historical block in the blockchain, which selected by the block number as a difference between current blockchain height and constant value, which determines the delay for increasing the stability of selected auth sample (Currently we use SVP). Formally,`payment_block_number = current_block_number - SVP`. Block defined by using its block number and block hash.
 
@@ -120,6 +121,7 @@ To validate RTA Transaction graftnode should perform several checks:
 > **Communication Messages** (Unicast, Multicast and Broadcast) should be always signed by its sender. Sender field in the message should be set to the sender public identification key and the signature must be add in signature field in the message. The signature is generated using the sender private identification key.
 
 4. At the same moment, **PoS** generates QR code for Wallet including RTA payment ID, _PoS public address_, payment block number, payment block hash, _PoS public one-time identification key_ and PoS data encryption key into it.
+
 > **Note:** I think we need to optimize data in QR code, however, it can decrease security since we must send more data over the network.
 
 5. **Wallet** scans QR code, gets RTA payment ID, payment block number and payment block hash from it and asks (`/dapi/get_payment_data` endpoint) its Wallet **Proxy Supernode** (can be any supernode in the network) for additional payment data (encrypted serialized payment data, PoS and Wallet Proxy Supernode public identification keys and public wallet addresses, Auth Sample Data). 
@@ -148,7 +150,9 @@ To validate RTA Transaction graftnode should perform several checks:
 
 10. Every supernode in the auth sample, upon receiving an encrypted transaction blob (`/core/authorize_rta_tx` endpoint), encrypted transaction private key and encrypted message key, does next operations:
     1. broadcasts signed pay status with status = **payment_pending** (`/core/update_payment_status` endpoint) over the **P2P network** 
-    >**Note:** Can be done by Wallet Proxy Supernode when/if we provide a mechanism for Proxy Supernode validation
+
+    >**Note:** Can be done by Wallet Proxy Supernode when/if we provide a mechanism for Proxy Supernode validation?
+    
     2. checks correctness of the selected auth sample using payment block hash and RTA payment ID, if it is incorrect, supernode rejects the transaction,
     3. validates transaction by checking its own fee amount and by checking if tx key images of the transaction already exist in the blockchain, transaction pool or the list of RTA transactions currently processed by supernode (double-spent check),
     4. multicasts the signed transaction to other supernodes in the auth sample(multicast message to be handled by `/core/authorize_rta_tx` endpoint).
@@ -199,13 +203,15 @@ To validate RTA Transaction graftnode should perform several checks:
 
 19. Each **supernode** in auth sample, upon receiving a notification from other auth sample supernodes, PoS, PoS Proxy Supernode, and Wallet Proxy Supernode, handles it by checking **signatures**:
     > **Consensus of Approval (CoA)**: 
-    > Transaction considered valid as soon as:
+    >
+    > Transaction considered valid as soon as
     >    * supernode receives a **valid** PoS signature,
     >    * supernode receives at least 6 out of 8 approvals until the validation timeout,
     >    * supernode receives valid PoS and Wallet Proxy Supernode signatures.
 
     > **Consensus of Rejection (CoR)**: 
-    > Transaction considered invalid as soon as:
+    >
+    > Transaction considered invalid as soon as
     >    * supernode receives an **invalid** PoS signature (fail status message from PoS),
     >    * supernode receives a rejection from some auth sample member,
     >    * supernode receives a rejection from PoS or Wallet Proxy Supernodes.
@@ -219,8 +225,7 @@ To validate RTA Transaction graftnode should perform several checks:
         3. if supernode cannot pass both consensuses, it broadcasts failed pay status over the network.
            
            > **Transaction Submission Warning**
-           >
-           >The most of the supernodes who voted transaction will be sent transaction to pool simultaneously and will obviously get "double spend" error, so in case some supernode will receive double spend here - it just ignores it.
+           > The most of the supernodes who voted transaction will be sent transaction to pool simultaneously and will obviously get "double spend" error, so in case some supernode will receive double spend here - it just ignores it.
 
 20. **Graftnode** that handles RTA transaction validates:
     1. The correctness of the selected auth sample;
@@ -232,4 +237,5 @@ To validate RTA Transaction graftnode should perform several checks:
 21. Once graftnode accepts the transaction, supernode, which submitted it to the graftnode, broadcasts successful pay status over the network.
 
 22. Each supernode handles status update message, checks signature and updates status for given payment only if signature validation passes. Each supernode which sent the request for a status update must sign this request using its private identification key.
+
 23. Wallet and PoS request their proxy supernodes or any other supernode to update their status.
