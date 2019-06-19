@@ -105,11 +105,9 @@ To validate RTA Transaction graftnode should perform several checks:
 
    4. Pos Proxy id and wallet address;
    > **Note:** To validate the correctness of Auth Sample Data, PoS may ask it from different Proxy Supernodes
-   >
+   
    > **TODO:** _Boris:_ I'm leaning towards trusting PoS proxy with respect to auth sample but use the PoS one-time identification keypair to enforce anonymity.
    
->**Payment Block Definition**
->
 >**Payment block** is a historical block in the blockchain, which selected by the block number as a difference between current blockchain height and constant value, which determines the delay for increasing the stability of selected auth sample (Currently we use SVP). Formally,`payment_block_number = current_block_number - SVP`. Block defined by using its block number and block hash.
 
 2. When PoS got data from Proxy Supernode, it prepares and sends payment data (`/dapi/sale` endpoint):
@@ -119,8 +117,6 @@ To validate RTA Transaction graftnode should perform several checks:
     
  3. Proxy Supernode receives sale request from PoS and multicasts it to all supernodes in the auth sample. Supernodes in the auth sample decrypt this data using their private identification keys and store it using the RTA payment ID.
 
-> **Communication Message Encryption**
->
 > **Communication Messages** (Unicast, Multicast and Broadcast) should be always signed by its sender. Sender field in the message should be set to the sender public identification key and the signature must be add in signature field in the message. The signature is generated using the sender private identification key.
 
 4. At the same moment, **PoS** generates QR code for Wallet including RTA payment ID, _PoS public address_, payment block number, payment block hash, _PoS public one-time identification key_ and PoS data encryption key into it.
@@ -157,64 +153,83 @@ To validate RTA Transaction graftnode should perform several checks:
     3. validates transaction by checking its own fee amount and by checking if tx key images of the transaction already exist in the blockchain, transaction pool or the list of RTA transactions currently processed by supernode (double-spent check),
     4. multicasts the signed transaction to other supernodes in the auth sample(multicast message to be handled by `/core/authorize_rta_tx` endpoint).
 
-11. Once PoS or Wallet Proxy Supernode receives encrypted transaction blob, encrypted transaction private key and encrypted message key, it
->**TODO:** _Ilya:_ As wallet proxy is the first one who started to sending this multicast, can it simply do all validations and sign tx at p.9?
+11. Once PoS or Wallet Proxy Supernode > **TODO:** _Ilya:_ As wallet proxy is the first one who started to sending this multicast, can it simply do all validations and sign tx at p.9? receives encrypted transaction blob, encrypted transaction private key and encrypted message key, it:
 
     1. validates its service fee and
+    
     2. if validation passes, proxy supernode signs transaction with its private identification key,
+    
     3. stores it in transaction extra data field and
+    
     4. multicasts the signed transaction to the auth sample.
         
-12. When PoS receives pending payment status, it
+12. When **PoS** receives pending payment status, it:
     1. creates the transaction request including RTA payment ID,
     2. signs it using its PoS private one-time identification key
     3. adds the signature to request and
-    4. sends the request to Proxy Supernode.
-13. When Proxy Supernode receives the transaction request, it randomly selects supernode in the auth sample and unicasts transaction request to it.
+    4. sends the request to Proxy Supernode (`/dapi/get_tx` endpoint).
+        
+13. When Proxy Supernode receives the transaction request, it randomly selects supernode in the auth sample and unicasts transaction request to it (`/core/get_tx` endpoint).
+
 14. An auth sample supernode, upon receiving the transaction request,
     1. checks the signature using PoS public one-time identification key, which included in transaction_header.extra
     2. if the signature is valid, gets transaction blob and transaction private key, encrypts those using the PoS public one-time identification key, and
     3. sends encrypted transaction blob and transaction private key to the PoS Proxy Supernode.
-15. PoS Proxy Supernode receives the answer from an auth sample supernode, sends encrypted transaction blob and transaction private key to the PoS.
-16. When PoS receives encrypted transaction blob and transaction private key, it
+    
+15. PoS **Proxy Supernode** receives the answer from an auth sample supernode, sends encrypted transaction blob and transaction private key to the **PoS** (responds to `/dapi/get_tx` endpoint).
+
+16. When **PoS** receives encrypted transaction blob and transaction private key, it
     1. decrypts transaction blob and transaction private key using its private PoS one-time identification key,
     2. validates the transaction and amount,
     3. if the validation pass, PoS
-        1. signs transaction using its PoS private one-time identification key,
-        2. adds the signature to the transaction_header.extra,
-        3. encrypts transaction using [Multiple Recipients Message Encryption](%5BRFC-001-GSD%5D-General-Supernode-Design.md#multiple-recipients-message-encryption) for auth sample supernodes, and
-        4. sends the encrypted transaction to its Proxy Supernode.
+       1. signs transaction using its PoS private one-time identification key,
+       2. adds the signature to the **transaction.rta_signatures**,
+       3. encrypts transaction using [Multiple Recipients Message Encryption](%5BRFC-001-GSD%5D-General-Supernode-Design.md#multiple-recipients-message-encryption) for auth sample supernodes, and
+       4. sends the encrypted transaction to its Proxy Supernode.
     4. if the transaction is invalid, PoS
-        1. creates "status fail" message, including status and signature generated using the PoS private one-time identification key,
-        2. encrypts signed "status fail" message using [Multiple Recipients Message Encryption](%5BRFC-001-GSD%5D-General-Supernode-Design.md#multiple-recipients-message-encryption) for auth sample supernodes, and
-        3. sends the encrypted status message to its Proxy Supernode.
+       1. creates "status fail" message, including status and signature generated using the PoS private one-time identification key,
+       2. encrypts signed "status fail" message using [Multiple Recipients Message Encryption](%5BRFC-001-GSD%5D-General-Supernode-Design.md#multiple-recipients-message-encryption) for auth sample supernodes, and
+       3. sends the encrypted status message to its Proxy Supernode.
+        
 17. When Proxy Supernode receives the encrypted transaction or the encrypted "status fail" message from PoS, it multicasts data to the auth sample supernodes.
+
 18. Authorization sample supernodes receive the message from Proxy Supernode and process it:
     1. if supernode receives the "status fail" message from PoS, it validates PoS signature using PoS public one-time identification key, included in the RTA transaction. If it's invalid, supernode rejects status message; otherwise, it creates own "status fail" message, signs the latter, broadcasts it over the network and removes all data related to the payment.
     2. if supernode receives transaction signed by PoS, it validates the signature and if it's valid, supernode stores PoS transaction signature.
-19. Each supernode in auth sample, upon receiving a notification from other auth sample supernodes, PoS, PoS Proxy Supernode, and Wallet Proxy Supernode, handles it by checking signatures:
-    > **Consensus of Approval (CoA)**: Transaction considered valid as soon as
-    >    * supernode receives a valid PoS signature,
+
+19. Each **supernode** in auth sample, upon receiving a notification from other auth sample supernodes, PoS, PoS Proxy Supernode, and Wallet Proxy Supernode, handles it by checking **signatures**:
+    > **Consensus of Approval (CoA)**: 
+    > Transaction considered valid as soon as:
+    >    * supernode receives a **valid** PoS signature,
     >    * supernode receives at least 6 out of 8 approvals until the validation timeout,
     >    * supernode receives valid PoS and Wallet Proxy Supernode signatures.
 
-    > **Consensus of Rejection (CoR)**: Transaction considered invalid as soon as
-    >    * supernode receives an invalid PoS signature (fail status message from PoS),
+    > **Consensus of Rejection (CoR)**: 
+    > Transaction considered invalid as soon as:
+    >    * supernode receives an **invalid** PoS signature (fail status message from PoS),
     >    * supernode receives a rejection from some auth sample member,
     >    * supernode receives a rejection from PoS or Wallet Proxy Supernodes.
+    
     1. When any auth sample supernode gets in:
-        1. the final approval state (receives 8 auth sample approvals, PoS approval, PoS and Wallet Proxy Supernode approvals), it fills rta_signatures and sends RTA transaction to its graftnode; 
-        2. the final rejection state (PoS Rejection, PoS or Wallet Proxy Supernode rejection, or at least one auth sample supernode rejection), it broadcasts failed pay status over the network.
+        1. the final approval state (**receives 8 auth sample approvals, PoS approval, PoS and Wallet Proxy Supernode approvals**), it fills rta_signatures and sends RTA transaction to its graftnode; 
+        2. the final rejection state (**PoS Rejection, PoS or Wallet Proxy Supernode rejection, or at least one auth sample supernode rejection**), it broadcasts failed pay status over the network.
     2. When any auth sample supernode gets in the validation timeout state, it
         1. checks Consensus of Rejection and if it passes, supernode broadcasts failed pay status over the network;
-        2. checks Consensus of Approval and if it passes, supernode fills rta_signatures and sends RTA transaction to its graftnode;
+        2. checks Consensus of Approval and if it passes, supernode fills **rta_signatures** and sends RTA transaction to its graftnode;
         3. if supernode cannot pass both consensuses, it broadcasts failed pay status over the network.
-20. Graftnode that handles RTA transaction validates:
+           
+           > **Transaction Submission Warning**
+           >
+           >The most of the supernodes who voted transaction will be sent transaction to pool simultaneously and will obviously get "double spend" error, so in case some supernode will receive double spend here - it just ignores it.
+
+20. **Graftnode** that handles RTA transaction validates:
     1. The correctness of the selected auth sample;
     2. PoS signature;
     3. Signatures from each auth sample's member (must be at least 6 out of 8 valid signatures);
     4. Wallet and PoS Proxy Supernode signatures;
     5. The transaction itself (as usual).
-21. Once graftnode accepts the transaction, supernode, which submitted it to the graftnode, broadcasts successful pay status over the network;  
+    
+21. Once graftnode accepts the transaction, supernode, which submitted it to the graftnode, broadcasts successful pay status over the network.
+
 22. Each supernode handles status update message, checks signature and updates status for given payment only if signature validation passes. Each supernode which sent the request for a status update must sign this request using its private identification key.
 23. Wallet and PoS request their proxy supernodes or any other supernode to update their status.
