@@ -229,6 +229,7 @@ To validate RTA Transaction graftnode should perform several checks:
         3. if supernode cannot pass both consensuses, it broadcasts failed pay status over the network.
            
            > **Transaction Submission Warning**
+           >
            > The most of the supernodes who voted transaction will be sent transaction to pool simultaneously and will obviously get "double spend" error, so in case some supernode will receive double spend here - it just ignores it.
 
 20. **Graftnode** that handles RTA transaction validates:
