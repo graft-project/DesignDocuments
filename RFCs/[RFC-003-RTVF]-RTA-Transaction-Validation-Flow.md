@@ -101,7 +101,7 @@ To validate RTA Transaction graftnode should perform several checks:
 
    2. payment block hash
 
-   3. and Auth Sample Data (8 pairs of the supernode public identification key and public wallet address, see [Selecting Auth Sample Supernode List](#https://github.com/graft-project/DesignDocuments/blob/master/RFCs/%5BRFC-002-SLS%5D-Supernode-List-Selection.md#selecting-auth-sample-list))
+   3. and Auth Sample Data (**8 pairs of the supernode public identification key and public wallet address**, see [Selecting Auth Sample Supernode List](#https://github.com/graft-project/DesignDocuments/blob/master/RFCs/%5BRFC-002-SLS%5D-Supernode-List-Selection.md#selecting-auth-sample-list))
 
    4. Pos Proxy id and wallet address;
    
@@ -109,7 +109,8 @@ To validate RTA Transaction graftnode should perform several checks:
    
       > **TODO:** _Boris:_ I'm leaning towards trusting PoS proxy with respect to auth sample but use the PoS one-time identification keypair to enforce anonymity.
    
->**Payment block** is a historical block in the blockchain, which selected by the block number as a difference between current blockchain height and constant value, which determines the delay for increasing the stability of selected auth sample (Currently we use SVP). Formally,`payment_block_number = current_block_number - SVP`. Block defined by using its block number and block hash.
+>**Payment Block Definition**
+>  **Payment block** is a historical block in the blockchain, which selected by the block number as a difference between current blockchain height and constant value, which determines the delay for increasing the stability of selected auth sample (Currently we use SVP). Formally,`payment_block_number = current_block_number - SVP`. Block defined by using its block number and block hash.
 
 2. When PoS got data from Proxy Supernode, it prepares and sends payment data (`/dapi/sale` endpoint):
     * generates the symmetric encryption key, called PoS data encryption key, serializes payment data - a list of purchased items, price and amount of each item, etc. - and encrypts it using PoS data encryption key;
@@ -118,7 +119,8 @@ To validate RTA Transaction graftnode should perform several checks:
     
  3. Proxy Supernode receives sale request from PoS and multicasts it to all supernodes in the auth sample. Supernodes in the auth sample decrypt this data using their private identification keys and store it using the RTA payment ID.
 
-> **Communication Messages** (Unicast, Multicast and Broadcast) should be always signed by its sender. Sender field in the message should be set to the sender public identification key and the signature must be add in signature field in the message. The signature is generated using the sender private identification key.
+>**Communication Message Encryption** 
+>  **Communication Messages** (Unicast, Multicast and Broadcast) should be always signed by its sender. Sender field in the message should be set to the sender public identification key and the signature must be add in signature field in the message. The signature is generated using the sender private identification key.
 
 4. At the same moment, **PoS** generates QR code for Wallet including RTA payment ID, _PoS public address_, payment block number, payment block hash, _PoS public one-time identification key_ and PoS data encryption key into it.
 
@@ -173,7 +175,7 @@ To validate RTA Transaction graftnode should perform several checks:
     3. adds the signature to request and
     4. sends the request to Proxy Supernode (`/dapi/get_tx` endpoint).
         
-13. When Proxy Supernode receives the transaction request, it randomly selects supernode in the auth sample and unicasts transaction request to it (`/core/get_tx` endpoint).
+13. When Proxy Supernode receives the transaction request, it randomly selects supernode in the auth sample and unicasts transaction request to it (`/core/tx_request` endpoint).
 
 14. An auth sample supernode, upon receiving the transaction request,
     1. checks the signature using PoS public one-time identification key, which included in transaction_header.extra
