@@ -11,21 +11,21 @@
 | 06/18/2019 | 0.3         |
 
 ***
- [Validation Flow Sequence Diagram](#validation-flow-sequence-diagram)
+1.[Validation Flow Sequence Diagram](#validation-flow-sequence-diagram)
  
-1 [RTA Transaction](#rta-transaction)
+2.[RTA Transaction](#rta-transaction)
 
-2 [RTA Transaction Validation](#[rta-transaction-validation])
+3.[RTA Transaction Validation](#[rta-transaction-validation])
 
-  2.1 [RTA Transaction Validation by PoS](#rta-transaction-validation-by-pos)
+  3.1 [RTA Transaction Validation by PoS](#rta-transaction-validation-by-pos)
   
-  2.2 [RTA Transaction Validation by Auth Sample Supernode](#rta-transaction-validation-by-auth-sample-supernode)
+  3.2 [RTA Transaction Validation by Auth Sample Supernode](#rta-transaction-validation-by-auth-sample-supernode)
   
-  2.3 [RTA Transaction Validation by Proxy Supernodes](#rta-transaction-validation-by-proxy-supernodes)
+  3.3 [RTA Transaction Validation by Proxy Supernodes](#rta-transaction-validation-by-proxy-supernodes)
   
-  2.4 [Blockchain RTA Transaction Validation](#blockchain-rta-transaction-validation)
+  3.4 [Blockchain RTA Transaction Validation](#blockchain-rta-transaction-validation)
   
-3 [Validation Flow Description](#validation-flow-description)
+4.[Validation Flow Description](#validation-flow-description)
 
 
 ## Validation Flow Sequence Diagram
