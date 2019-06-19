@@ -59,14 +59,18 @@ PoS and Wallet Proxy Supernodes validate the service fee.
 ### RTA Transaction Validation by PoS
 When PoS receives RTA transaction data for RTA validation, it performs the following operations:
 1. Decrypts received RTA transaction data:
+
    a. Decrypts message key using its private one-time identification key.
+   
    b. Decrypts RTA transaction and transaction private key using message key.
 2. Checks amount in the transaction, using transaction private key and PoS public wallet address based on [Monero Prove Payment Mechanism](https://www.getmonero.org/resources/user-guides/prove-payment.html).
 
 ### RTA Transaction Validation by Auth Sample Supernode
 When a supernode in auth sample receives RTA transaction data for RTA validation, it performs the following operations:
 1. Decrypts received RTA transaction data:
+
    a. Decrypts message key using its supernode private identification key.
+   
    b. Decrypts RTA transaction and transaction private key using message key.
 2. Checks correctness of selected auth sample using payment block hash and RTA payment ID.
 3. Validates transaction key images (double-spent check) in the blockchain, transaction pool and the list of currently processing RTA Transaction on supernode.
@@ -75,7 +79,9 @@ When a supernode in auth sample receives RTA transaction data for RTA validation
 ### RTA Transaction Validation by Proxy Supernodes
 When PoS or Wallet Proxy Supernode receives RTA transaction data for RTA validation, it performs following operations:
 1. Decrypts received RTA transaction data:
+
    a. Decrypts message key using PoS or Wallet Proxy Supernode private identification key.
+   
    b. Decrypts RTA transaction and transaction private key using message key.
 2. Checks the service fee, using transaction private key and proxy supernode public wallet address based on [Monero Prove Payment Mechanism](https://www.getmonero.org/resources/user-guides/prove-payment.html).
 
@@ -89,9 +95,23 @@ To validate RTA Transaction graftnode should perform several checks:
 
 ## Validation Flow Description
 
-1. PoS generates PoS one-time identification keypair and RTA payment ID based on PoS public one-time identification key. Then PoS sends RTA payment ID to Proxy Supernode and asks payment block number, payment block hash, and Auth Sample Data (8 pairs of the supernode public identification key and public wallet address, see [Selecting Auth Sample Supernode List](%5BRFC-002-SLS%5D-Supernode-List-Selection.md#selecting-auth-sample-list)).
+1. PoS generates PoS one-time identification keypair and RTA payment ID based on PoS public one-time identification key.  Then PoS requests auth sample from Proxy Supernode, passing  RTA payment ID to it (`/dapi/presale` endpoint). Proxy Supernode returns:
 
-> **Payment block** is a historical block in the blockchain, `payment_block_number = current_block_number - SVP` (see [SVP](%5BRFC-001-GSD%5D-General-Supernode-Design.md#supernode-prerequisites)). Payment Block defined by using its block number and block hash.
+   a. payment block number
+
+   b. payment block hash
+
+   c. and Auth Sample Data (8 pairs of the supernode public identification key and public wallet address, see [Selecting Auth Sample Supernode List](#https://github.com/graft-project/DesignDocuments/blob/master/RFCs/%5BRFC-002-SLS%5D-Supernode-List-Selection.md#selecting-auth-sample-list))
+
+   d. Pos Proxy id and wallet address;
+   > Note: To validate the correctness of Auth Sample Data, PoS may ask it from different Proxy Supernodes
+   ```ruby
+   TODO: Boris: I'm leaning towards trusting PoS proxy with respect to auth sample but use the PoS one-time identification keypair to enforce anonymity.
+   ```
+
+>**Payment Block Definition**
+>
+>**Payment block** is a historical block in the blockchain, which selected by the block number as a difference between current blockchain height and constant value, which determines the delay for increasing the stability of selected auth sample (Currently we use SVP). Formally,`payment_block_number = current_block_number - SVP`. Block defined by using its block number and block hash.
 
 2. When PoS got data from Proxy Supernode, it prepares and sends payment data:
     * generates the symmetric encryption key, called PoS data encryption key, serializes payment data - a list of purchased items, price and amount of each item, etc. - and encrypts it using PoS data encryption key;
