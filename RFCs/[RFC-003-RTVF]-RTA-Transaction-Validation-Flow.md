@@ -109,38 +109,45 @@ To validate RTA Transaction graftnode should perform several checks:
    
       > **TODO:** _Boris:_ I'm leaning towards trusting PoS proxy with respect to auth sample but use the PoS one-time identification keypair to enforce anonymity.
    
->**Payment Block Definition**
->
->  **Payment block** is a historical block in the blockchain, which selected by the block number as a difference between current blockchain height and constant value, which determines the delay for increasing the stability of selected auth sample (Currently we use SVP). Formally,`payment_block_number = current_block_number - SVP`. Block defined by using its block number and block hash.
+    >**Payment Block Definition**
+    >
+    >  **Payment block** is a historical block in the blockchain, which selected by the block number as a difference between current blockchain height and constant value, which determines the delay for increasing the stability of selected auth sample (Currently we use SVP). Formally,`payment_block_number = current_block_number - SVP`. Block defined by using its block number and block hash.
 
-2. When PoS got data from Proxy Supernode, it prepares and sends payment data (`/dapi/sale` endpoint):
-    * generates the symmetric encryption key, called PoS data encryption key, serializes payment data - a list of purchased items, price and amount of each item, etc. - and encrypts it using PoS data encryption key;
-    * collects payment data - amount, encrypted serialized payment data - and encrypts it using [Multiple Recipients Message Encryption](%5BRFC-001-GSD%5D-General-Supernode-Design.md#multiple-recipients-message-encryption): PoS generates random message key, encrypts payment data using the message key, then encrypts message key for each supernode in the auth sample, using supernode public identification keys;
-    * sends encrypted payment data and encrypted message key in the sale request to the Proxy Supernode to be multicasted by Proxy Supernode to auth sample supernodes.
+    > **Purchase details**  is an information about purchase - may include list of pushase items, price and amount of each item, etc
+
+    > **Payment data** is a data structure containing **encrypted purchase details** and total amount  (**FullTxAmount** in atomic units)
+
+2. When PoS got data from Proxy Supernode, it prepares and sends **encrypted payment data** (to `/dapi/sale` endpoint):
+    * ~~generates the symmetric encryption key, called **PoS data encryption key**. This key will be only passed to Wallet app (only Wallet app can read this payment details)~~
+        > NOTE: for now we don't have an interface do encrypt/decrypt with symmetric keys and error handling, so it's ok to re-use `graft::crypto_tools::encryptMessage` to encrypt payment data for wallet: PoS will generate one-time keypair, encrypt and pass private key (instead of symmetric encryption key) via QR Code.
+    * generates one-time keypair to encrypt **purchase details** for wallet app (WalletSecretKey, WalletPubKey);
+    * serializes **purchase details** and encrypts it using [Multiple Recipients Message Encryption](%5BRFC-001-GSD%5D-General-Supernode-Design.md#multiple-recipients-message-encryption) with only WalletPubKey;
+    * builds **payment data** (encrypted purchase details with total amount), serializes and encrypts it using [Multiple Recipients Message Encryption](%5BRFC-001-GSD%5D-General-Supernode-Design.md#multiple-recipients-message-encryption) with auth sample public keys: ~~PoS generates random message key, encrypts payment data using the message key, then encrypts message key for each supernode in the auth sample, using supernode public identification keys~~ (currenty implemented in cryptonode's `graft::crypto_tools::encryptMessage` interface so PoS doesn't need to deal with encrypted session key, it embedded into encrypted message); This way Supernodes who receive this message can only read total amount but not purchase details;
+    * sends **encrypted payment data** ~~and encrypted message key~~ in the sale request to the Proxy Supernode to be multicasted by Proxy Supernode to auth sample supernodes.
+
+        >`message key embedded into encrypted message and handled by graft::crypto_tools::encryptMessage/graft::crypto_tools::decryptMessage interfaces`
     
- 3. Proxy Supernode receives sale request from PoS and multicasts it to all supernodes in the auth sample. Supernodes in the auth sample decrypt this data using their private identification keys and store it using the RTA payment ID.
+3. Proxy Supernode receives sale request from PoS and multicasts it to all supernodes in the auth sample. Supernodes in the auth sample decrypt encrypted **Payment data**  using their private identification keys and store encrypted **Payment data** and **decrypted amount** using RTA payment ID as a key;
 
 >**Communication Message Encryption** 
 >
 >  **Communication Messages** (Unicast, Multicast and Broadcast) should be always signed by its sender. Sender field in the message should be set to the sender public identification key and the signature must be add in signature field in the message. The signature is generated using the sender private identification key.
 
+
 4. At the same moment, **PoS** generates QR code for Wallet including RTA payment ID, _PoS public address_, payment block number, payment block hash, _PoS public one-time identification key_ and PoS data encryption key into it.
+
 
 > **Note:** I think we need to optimize data in QR code, however, it can decrease security since we must send more data over the network.
 
 5. **Wallet** scans QR code, gets RTA payment ID, payment block number and payment block hash from it and asks (`/dapi/get_payment_data` endpoint) its Wallet **Proxy Supernode** (can be any supernode in the network) for additional payment data (encrypted serialized payment data, PoS and Wallet Proxy Supernode public identification keys and public wallet addresses, Auth Sample Data). 
 
-6. Wallet **Proxy Supernode**
-   
+6. **Wallet Proxy Supernode**
    1. receives wallet request,
-   
    2. validates selected auth sample and
-   
    3. returns encrypted serialized payment data, Auth Sample Data (**8 pairs of the supernode public identification key and public wallet address**, see [Selecting Auth Sample Supernode List](%5BRFC-002-SLS%5D-Supernode-List-Selection.md#selecting-auth-sample-list)), PoS and Wallet Proxy Supernode public identification keys and public wallet addresses.
  
-7. If Wallet **Proxy Supernode** doesn't have encrypted serialized payment data and PoS Proxy Supernode public identification key and public wallet address:
     1. it looks up Auth Sample and requests the data from one of the randomly selected supernode in the auth sample. The request is sent as a unicast async message to the remote supernode. 
-    2. remote supernode replies on this request and returns payment data encrypted by the public identification key of a supernode required the data. The reply is sent as a unicast async message.
+    2. remote supernode replies on this request and returns **encrypted payment data** (**encrypted purchase details** and total amount). **Payment data** encrypted with the public identification key of a supernode who requested the data. The reply is sent as a unicast async message.
 
 8. **Wallet**
     * builds graft transaction, distributing fee over auth sample and **Proxy Supernodes** (more details on that can be found in the whitepaper);
