@@ -157,7 +157,6 @@ To validate RTA Transaction graftnode should perform several checks:
     * stores **RTA payment ID**, **PoS public one-time identification key** (used to identify PoS in the network and protect data for it), **auth sample supernode public identification keys** (graftnode will need it to validate auth sample signatures), **PoS** and **Wallet Proxy Supernode identification keys** to **transaction_header.extra**.
     * signs transaction,
     * encrypts transaction blob and transaction private key using [Multiple Recipients Message Encryption](%5BRFC-001-GSD%5D-General-Supernode-Design.md#multiple-recipients-message-encryption) for PoS, auth sample supernodes and proxy supernodes, and
-    *  proxy supernodes, and
     * sends encrypted transaction blob, encrypted transaction private key and encrypted message key to the Wallet **Proxy Supernode** (`/dapi/pay` endpoint).
     
 9. Once Wallet **Proxy Supernode** receives wallet request with the encrypted transaction blob and transaction private key, it multicasts encrypted transaction, encrypted transaction private key and encrypted message keys to the **auth sample supernodes** and **proxy supernodes**.
