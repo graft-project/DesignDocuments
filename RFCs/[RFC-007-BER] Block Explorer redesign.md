@@ -1,21 +1,15 @@
-#Block Explorer redesign 
+# Block Explorer redesign 
 
 
 
 |##|Story|
 |---|----------|
-Story#1
-As a SN owner I want to see in the Tx List in the Blockchain Explorer info (or marker) about pool and type of each  Tx: RTA, Stake, Fee, Reward
-Story#2
-As a SN owner I want to see SN List in the Blockchain Explorer  and want to have the ability to search my SN in the SN List
-Story#3
-As a SN owner I want to see BBList in the Blockchain Explorer  and want to have the ability to search my SN in the BBList
-Story#4
-As a SN owner I want to see AuthSampleList in the Blockchain Explorer  and want to have the ability to search my SN in the AuthSampleList
-Story#5
-As a SN owner I want to see DisqList in the Blockchain Explorer  and want to have the ability to search my SN in the DisqList
-Story#6
-As a Graft network user  I want to have the ability to see details of RTA  transactions
+|Story#1 | As a SN owner I want to see in the Tx List in the Blockchain Explorer info (or marker) about pool and type of each  Tx: RTA, Stake, Fee, Reward|
+|Story#2 |As a SN owner I want to see SN List in the Blockchain Explorer  and want to have the ability to search my SN in the SN List
+|Story#3 |As a SN owner I want to see BBList in the Blockchain Explorer  and want to have the ability to search my SN in the BBList
+|Story#4 |As a SN owner I want to see AuthSampleList in the Blockchain Explorer  and want to have the ability to search my SN in the AuthSampleList
+|Story#5 |As a SN owner I want to see DisqList in the Blockchain Explorer  and want to have the ability to search my SN in the DisqList
+|Story#6 |As a Graft network user  I want to have the ability to see details of RTA  transactions
 
 
 
