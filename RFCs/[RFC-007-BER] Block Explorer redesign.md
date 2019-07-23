@@ -27,9 +27,12 @@
    1.2.2 The pool information should contain a link by clicking on which I can go to the site of the corresponding pool.
 
    1.2.3. For example: 
-          Graft.community - https://pool.graft.community/#pool_blocks,
-          Cryptopool.space -  https://grft.cryptopool.space/#/blocks,
-          Hash Vault - https://graft.hashvault.pro/en/#!/blocks
+       
+   - Graft.community - https://pool.graft.community/#pool_blocks
+       
+   - Cryptopool.space -  https://grft.cryptopool.space/#/blocks
+       
+   - Hash Vault - https://graft.hashvault.pro/en/#!/blocks
 
    1.2.4 Info should be displayed in the same format with other info in these tables (font, size etc)
 
@@ -54,7 +57,7 @@ Pic.1
    1.3.3  
    Table 1
 
-|Tx type|Marker (for example, can be change to other marker)|Additional Info in a pop-up window|
+|Tx type|Markers example (can be change to other)|Additional Info in a pop-up window|
 |---|----------|------|
 |Normal Tx| - | - |
 |RTA Tx||RTA transaction|
