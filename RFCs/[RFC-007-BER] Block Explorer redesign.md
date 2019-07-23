@@ -87,11 +87,11 @@ Pic.1
 
 2.5. By default I can see SN List for the last block.  
 
-2.6. Entering information into the field (pic.2[1]) and pressing the Search button I should see info about  SNs in block  which I search
+2.6. When I enter information into the field (pic.2[1]) and press the Search button I should see info about  SNs in block  which I search
 
-2.7. Entering information into the field (pic.2[2]) and pressing the Search button I should see info about  SN which I search 
+2.7. When I enter information into the field (pic.2[2]) and press the Search button I should see info about  SN which I search 
 
-2.8. Entering information into the fields (pic.2[1]) and (pic.2[2]) and pressing the Search button I should see info about  my SN for the block which I search 
+2.8. When I enter information into the fields (pic.2[1]) and (pic.2[2]) and press the Search button I should see info about  my SN for the block which I search 
 
 2.9. The public_ID in the SN List should contain a link by clicking on which I can go to the new screen with SN's details (pic.3)
 
@@ -123,11 +123,11 @@ Pic.2
 
 3.5. By default I can see BB List for the last block. 
 
-3.6. Entering information into the field (pic.2[1]) and pressing the Search button I should see info about  SNs in the BBList in the block  which I search 
+3.6. When I enter information into the field (pic.2[1]) and press the Search button I should see info about  SNs in the BBList in the block  which I search 
 
-3.7. Entering information into the field (pic.2[2]) and pressing the Search button I should see info about  SN  in the BBList which I search 
+3.7. When I enter information into the field (pic.2[2]) and press the Search button I should see info about  SN  in the BBList which I search 
 
-3.8. Entering information into the fields (pic.2[1]) and (pic.2[2]) and pressing the Search button I should see info about  my SN  in the BBList for the block which I search.
+3.8. When I enter information into the fields (pic.2[1]) and (pic.2[2]) and press the Search button I should see info about  my SN  in the BBList for the block which I search.
 
 3.9. The public_ID in the BB List should contain a link by clicking on which I can go to the new screen with SN's details (pic.3).
 
@@ -159,11 +159,11 @@ Pic.3
 
 4.4. By default I can see AuthSample List for the last block. 
 
-4.5. Entering information into the field (pic.2[1]) and pressing the Search button I should see info about  SNs in the AuthSample List in the block  which I search 
+4.5. When I enter information into the field (pic.2[1]) and press the Search button I should see info about  SNs in the AuthSample List in the block  which I search 
 
-4.6. Entering information into the field (pic.2[2]) and pressing the Search button I should see info about  SN  in the AuthSample List which I search 
+4.6. When I enter information into the field (pic.2[2]) and press the Search button I should see info about  SN  in the AuthSample List which I search 
 
-4.7. Entering information into the fields (pic.2[1]) and (pic.2[2]) and pressing the Search button I should see info about  my SN  in the AuthSample List for the block which I search 
+4.7. When I enter information into the fields (pic.2[1]) and (pic.2[2]) and press the Search button I should see info about  my SN  in the AuthSample List for the block which I search 
 
 4.8. The public_ID in the AuthSample List should contain a link by clicking on which I can go to the new screen with SN's details (pic.3).
 
@@ -197,13 +197,13 @@ Pic.4
 
 5.4. By default I can see info about 11 SNs. For displaying more info I should press button “> more” on the end of Disq List.
 
-5.5. Default I can see Disq List for the last block. 
+5.5. By default I can see Disq List for the last block. 
 
-5.6. Entering information into the field (pic.2[1]) and pressing the Search button I should see info about  SNs in the DisqList in the block  which I search 
+5.6. When I enter information into the field (pic.2[1]) and press the Search button I should see info about  SNs in the DisqList in the block  which I search 
 
-5.7. Entering information into the field (pic.2[2]) and pressing the Search button I should see info about  SN  in the DisqList which I search 
+5.7. When I enter information into the field (pic.2[2]) and press the Search button I should see info about  SN  in the DisqList which I search 
 
-5.8. Entering information into the fields (pic.2[1]) and (pic.2[2]) and pressing the Search button I should see info about  my SN  in the DisqList for the block which I search 
+5.8. When I enter information into the fields (pic.2[1]) and (pic.2[2]) and press the Search button I should see info about  my SN  in the DisqList for the block which I search 
 
 5.9. The public_ID in the Disq List should contain a link by clicking on which I can go to the new screen with SN's details (pic.3).
 
