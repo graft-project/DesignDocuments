@@ -1,6 +1,7 @@
 # Block Explorer redesign 
 
 
+## Stories
 
 |##|Story|
 |---|----------|
@@ -13,21 +14,24 @@
 
 
 
-Use cases
+## Use cases
 
-Story#1: As a SN owner I want to see in the Tx List in the Blockchain Explorer info (or mark) about type of Tx: RTA, Stake, Fee, Reward
+### Story#1: As a SN owner I want to see in the Tx List in the Blockchain Explorer info (or mark) about type of Tx: RTA, Stake, Fee, Reward
 
 1.1. Go to Blockchain Explorer: https://blockexplorer.graft.network/
+
 1.2. Additional column “pool” (see pic.1) should be present in the block “Transactions in the last 11 blocks” 
-1.2.1. This column should include info about pool for a specific Tx (see pic.1[1]).
-1.2.2 The pool information should contain a link by clicking on which I can go to the site of the corresponding pool.
-1.2.3. For example: 
-Graft.community - https://pool.graft.community/#pool_blocks,
-Cryptopool.space -  https://grft.cryptopool.space/#/blocks,
-Hash Vault - https://graft.hashvault.pro/en/#!/blocks
 
-1.2.4 Info should be displayed in the same format with other info in these tables (font, size etc)
+   1.2.1. This column should include info about pool for a specific Tx (see pic.1[1]).
+     
+   1.2.2 The pool information should contain a link by clicking on which I can go to the site of the corresponding pool.
 
+   1.2.3. For example: 
+          Graft.community - https://pool.graft.community/#pool_blocks,
+          Cryptopool.space -  https://grft.cryptopool.space/#/blocks,
+          Hash Vault - https://graft.hashvault.pro/en/#!/blocks
+
+   1.2.4 Info should be displayed in the same format with other info in these tables (font, size etc)
 
 1.3 Column “transaction hash” in the blocks “Transaction pool” and “Transactions in the last 11 blocks” should contain marker for specific Tx (see pic.1[2]).
 
@@ -36,65 +40,62 @@ Hash Vault - https://graft.hashvault.pro/en/#!/blocks
 Pic.1
 
 
-1.3.1 Following transactions are marked:
-RTA Tx
-Stake Tx ( and additional marker shows if it Tx is in stake)
-Disq Tx
-Stimulus Tx
+   1.3.1 Following transactions are marked:
+         - RTA Tx
+         - Stake Tx ( and additional marker shows if it Tx is in stake)
+         - Disq Tx
+         - Stimulus Tx
 
-NOTE: Normal tx is not marked
+   > NOTE: Normal tx is not marked
 
-1.3.2  Hovering the cursor on the Tx marker, a pop-up window should appear with additional info.
+   1.3.2  Hovering the cursor on the Tx marker, a pop-up window should appear with additional info.
+   
+   1.3.3  
+   Table 1
 
-1.3.3  
- Table 1
-Tx type
-Marker (for example, can be change to other marker)
-Additional Info in a pop-up window
-Normal Tx
--
--
-RTA Tx
-
-RTA transaction
-Stake Tx 
-
-SN Stake transaction partly in stake
-Stake Tx (if  Tx amount>=stake amount)
-
-SN Stake transaction (T1)
-Disq Tx
-
-Disqualification transaction
-Fee Tx
-
-Stimulus Transaction
+|Tx type|Marker (for example, can be change to other marker)|Additional Info in a pop-up window|
+|---|----------|------|
+|Normal Tx| - | - |
+|RTA Tx||RTA transaction|
+|Stake Tx| |SN Stake transaction partly in stake|
+|Stake Tx (if  Tx amount>=stake amount)| |SN Stake transaction (T1)|
+| Disq Tx| |Disqualification transaction| 
+| Fee Tx| |Stimulus Transaction|
 
 
-
-Story#2: As a SN owner I want to see SN List in the Blockchain Explorer  and want to have the ability to search my SN in the SN List
+### Story#2: As a SN owner I want to see SN List in the Blockchain Explorer  and want to have the ability to search my SN in the SN List
 
 2.1. Go to Blockchain Explorer: https://blockexplorer.graft.network/
-2.2 Block “SN List” should be present after block “Transactions in the last 11 blocks”  with default info about SN List in last block (pic.2,[3])
-2.3. Following info from SN List  should displayed :
-Height
-Public ID
-IsStakeValid (True/Faulse)
-Tier (0/1/2/3/4)
-StakeAmount
-StakeFirstValidBlock
-StakeExpiringBlock
-2.4. By default I can see info about 11 SNs. For displaying more info I should press button “> more” on the end of SN List.
-2.5. By default I can see SN List for the last block. 
-2.6. Entering information into the field (pic.2[1]) and pressing the Search button I should see info about  SNs in block  which I search 
-2.7. Entering information into the field (pic.2[2]) and pressing the Search button I should see info about  SN which I search 
-2.8. Entering information into the fields (pic.2[1]) and (pic.2[2]) and pressing the Search button I should see info about  my SN for the block which I search 
-2.9. The public_ID in the SN List should contain a link by clicking on which I can go to the new screen with SN`s details (pic.3).
-2.9.1. By default, the screen displays information about the Supernode selected in the previous mode.
-2.9.2. Additional search is provided by SN public ID and block height. If no block height is specified, information is searched for the last SN Stake.
-2.9.3. The Transaction hash  in the Transaction list should contain a link by clicking on which I can go to the new screen with Tx`s details (pic.4).
 
-Story#3: As a SN owner I want to see BBList in the Blockchain Explorer  and want to have the ability to search my SN in the BBList
+2.2 Block “SN List” should be present after block “Transactions in the last 11 blocks”  with default info about SN List in last block (pic.2,[3])
+
+2.3. Following info from SN List  should displayed :
+     - Height
+     - Public ID
+     - IsStakeValid (True/Faulse)
+     - Tier (0/1/2/3/4)
+     - StakeAmount
+     - StakeFirstValidBlock
+     - StakeExpiringBlock
+
+2.4. By default I can see info about 11 SNs. For displaying more info I should press button “> more” on the end of SN List.
+
+2.5. By default I can see SN List for the last block.  
+
+2.6. Entering information into the field (pic.2[1]) and pressing the Search button I should see info about  SNs in block  which I search
+
+2.7. Entering information into the field (pic.2[2]) and pressing the Search button I should see info about  SN which I search 
+
+2.8. Entering information into the fields (pic.2[1]) and (pic.2[2]) and pressing the Search button I should see info about  my SN for the block which I search 
+
+2.9. The public_ID in the SN List should contain a link by clicking on which I can go to the new screen with SN's details (pic.3)
+    2.9.1. By default, the screen displays information about the Supernode selected in the previous mode
+     
+    2.9.2. Additional search is provided by SN public ID and block height. If no block height is specified, information is searched for the last SN Stake
+     2.9.3. The Transaction hash  in the Transaction list should contain a link by clicking on which I can go to the new screen with Tx's details (pic.4)
+
+### Story#3: As a SN owner I want to see BBList in the Blockchain Explorer  and want to have the ability to search my SN in the BBList
+
 3.1. Go to Blockchain Explorer: https://blockexplorer.graft.network/
 3.2 Block “BB List” should be present after block “Supernodes List”  with default info about BB List in last block (pic.2,[4])
 3.3. Following info from BB List  should displayed :
