@@ -60,10 +60,10 @@ Pic.1
 |Tx type|Markers example (can be change to other)|Additional Info in a pop-up window|
 |---|----------|------|
 |Normal Tx| - | - |
-|RTA Tx||RTA transaction|
+|RTA Tx|![rta_1](https://user-images.githubusercontent.com/45132833/61711490-ddb90f00-ad5c-11e9-8155-55fe7521544e.png)|RTA transaction|
 |Stake Tx|![stake_0](https://user-images.githubusercontent.com/45132833/61710438-5c607d00-ad5a-11e9-8be9-e2217bf033b0.gif)|SN Stake transaction partly in stake|
 |Stake Tx (if  Tx amount>=stake amount)|![stake_1](https://user-images.githubusercontent.com/45132833/61710967-97af7b80-ad5b-11e9-927c-c25660c4d079.png)  ![stake_0](https://user-images.githubusercontent.com/45132833/61710438-5c607d00-ad5a-11e9-8be9-e2217bf033b0.gif)|SN Stake transaction (T1)|
-| Disq Tx| |Disqualification transaction| 
+| Disq Tx|![DIsq](https://user-images.githubusercontent.com/45132833/61711291-5e2b4000-ad5c-11e9-9391-ab50b19e4da2.png) |Disqualification transaction| 
 | Fee Tx|![Fee](https://user-images.githubusercontent.com/45132833/61710751-004a2880-ad5b-11e9-8ddd-01cf6d9b3716.png) |Stimulus Transaction|
 
 
