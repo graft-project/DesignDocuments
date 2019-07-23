@@ -126,7 +126,7 @@ Pic.1
 
 3.9.2. Additional search is provided by SN public ID and block height. If no block height is specified, information is searched for the last SN Stake
 
-3.9.3. The Transaction hash  in the Transaction list should contain a link by clicking on which I can go to the new screen with Tx`s details (pic.4)
+3.9.3. The Transaction hash  in the Transaction list should contain a link by clicking on which I can go to the new screen with Tx's details (pic.4)
 
 
 Pic.2
@@ -137,64 +137,89 @@ Pic.3
 ### Story#4: As a SN owner I want to see AuthSampleList in the Blockchain Explorer  and want to have the ability to search my SN in the AuthSampleList
 
 4.1. Go to Blockchain Explorer: https://blockexplorer.graft.network/
+
 4.2 Block “AuthSample List” should be present after block “BB List”  with default info about AuthSample List in last block (pic.2,[5])
+
 4.3. Following info from AuthSample List  should displayed :
-Height
-Payment ID (for RTA TX)
-Public ID
-Tier (0/1/2/3/4)
-StakeAmount
-StakeFirstValidBlock
-StakeExpiringBlock
+
+   - Height
+   - Payment ID (for RTA TX)
+   - Public ID
+   - Tier (0/1/2/3/4)
+   - StakeAmount
+   - StakeFirstValidBlock
+   - StakeExpiringBlock
+
 4.4. By default I can see AuthSample List for the last block. 
+
 4.5. Entering information into the field (pic.2[1]) and pressing the Search button I should see info about  SNs in the AuthSample List in the block  which I search 
+
 4.6. Entering information into the field (pic.2[2]) and pressing the Search button I should see info about  SN  in the AuthSample List which I search 
+
 4.7. Entering information into the fields (pic.2[1]) and (pic.2[2]) and pressing the Search button I should see info about  my SN  in the AuthSample List for the block which I search 
-4.8. The public_ID in the AuthSample List should contain a link by clicking on which I can go to the new screen with SN`s details (pic.3).
-4.8.1. By default, the screen displays information about the Supernode selected in the previous mode.
-4.8.2. Additional search is provided by SN public ID and block height. If no block height is specified, information is searched for the last SN Stake.
-3.9.3. The Transaction hash  in the Transaction list should contain a link by clicking on which I can go to the new screen with Tx`s details (pic.4).
+
+4.8. The public_ID in the AuthSample List should contain a link by clicking on which I can go to the new screen with SN's details (pic.3).
+
+   4.8.1. By default, the screen displays information about the Supernode selected in the previous mode.
+ 
+   4.8.2. Additional search is provided by SN public ID and block height. If no block height is specified, information is searched for the last SN Stake.
+
+   4.8.3. The Transaction hash  in the Transaction list should contain a link by clicking on which I can go to the new screen with Tx's details (pic.4).
 
 
 ### Story#5: As a SN owner I want to see DisqList in the Blockchain Explorer  and want to have the ability to search my SN in the DisqList
 
 5.1. Go to Blockchain Explorer: https://blockexplorer.graft.network/
+
 5.2 Block “Disq List” should be present after block “AuthSample List”  with default info about Disq List in last block (pic.2,[6])
+
 5.3. Following info from Disq List  should displayed :
-Public ID
-StakeAmount
-Disq Tx hash
-RTA Tx hash (for  disq Tx #2)
-StakeFirstValidBlock
-StakeExpiringBlock
-Disq ExpiringBlock
-Disq StartBlock
+
+   - Public ID
+   - StakeAmount
+   - Disq Tx hash
+   - RTA Tx hash (for  disq Tx #2)
+   - StakeFirstValidBlock
+   - StakeExpiringBlock
+   - Disq ExpiringBlock
+   - Disq StartBlock
 
 5.4. By default I can see info about 11 SNs. For displaying more info I should press button “> more” on the end of Disq List.
+
 5.5. Default I can see Disq List for the last block. 
+
 5.6. Entering information into the field (pic.2[1]) and pressing the Search button I should see info about  SNs in the DisqList in the block  which I search 
+
 5.7. Entering information into the field (pic.2[2]) and pressing the Search button I should see info about  SN  in the DisqList which I search 
+
 5.8. Entering information into the fields (pic.2[1]) and (pic.2[2]) and pressing the Search button I should see info about  my SN  in the DisqList for the block which I search 
-5.9. The public_ID in the Disq List should contain a link by clicking on which I can go to the new screen with SN`s details (pic.3).
-5.9.1. By default, the screen displays information about the Supernode selected in the previous mode.
-5.9.2. Additional search is provided by SN public ID and block height. If no block height is specified, information is searched for the last SN Stake.
-5.9.3. The Transaction hash  in the Transaction list should contain a link by clicking on which I can go to the new screen with Tx`s details (pic.4).
+
+5.9. The public_ID in the Disq List should contain a link by clicking on which I can go to the new screen with SN's details (pic.3).
+
+   5.9.1. By default, the screen displays information about the Supernode selected in the previous mode
+
+   5.9.2. Additional search is provided by SN public ID and block height. If no block height is specified, information is searched for the last SN Stake
+
+   5.9.3. The Transaction hash  in the Transaction list should contain a link by clicking on which I can go to the new screen with Tx's details (pic.4)
 
 
 ### Story#6: As a Graft network user  I want to have the ability to see details of RTA  transactions
 
 6.1. Pressing  on the “Transaction hash” link I should go to the transaction detail Screen (pic.4)
+
 6.2. Additional info about RTA transaction is displayed in the “RTA info” tab (pic.4).
+
 6.3. Following RTA info is displayed:
-Height for AuthSampleList
-RTA payment_id
-Info about SNs from AuthSampleList:
-SN Public ID
-Is RTA Tx Signed by this SN
-Tier
-Stake Amount
-StakeFirstValidBlock
-StakeExpiringBlock.
+
+   - Height for AuthSampleList
+   - RTA payment_id
+   - Info about SNs from AuthSampleList:
+     - SN Public ID
+     - Is RTA Tx Signed by this SN
+     - Tier
+     - Stake Amount
+     - StakeFirstValidBlock
+     - StakeExpiringBlock.
 
 
 Pic.4
