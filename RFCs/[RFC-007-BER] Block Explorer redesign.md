@@ -70,13 +70,14 @@ Pic.1
 2.2 Block “SN List” should be present after block “Transactions in the last 11 blocks”  with default info about SN List in last block (pic.2,[3])
 
 2.3. Following info from SN List  should displayed :
-     - Height
-     - Public ID
-     - IsStakeValid (True/Faulse)
-     - Tier (0/1/2/3/4)
-     - StakeAmount
-     - StakeFirstValidBlock
-     - StakeExpiringBlock
+   
+   - Height
+   - Public ID
+   - IsStakeValid (True/Faulse)
+   - Tier (0/1/2/3/4)
+   - StakeAmount
+   - StakeFirstValidBlock
+   - StakeExpiringBlock
 
 2.4. By default I can see info about 11 SNs. For displaying more info I should press button “> more” on the end of SN List.
 
@@ -89,32 +90,43 @@ Pic.1
 2.8. Entering information into the fields (pic.2[1]) and (pic.2[2]) and pressing the Search button I should see info about  my SN for the block which I search 
 
 2.9. The public_ID in the SN List should contain a link by clicking on which I can go to the new screen with SN's details (pic.3)
-    2.9.1. By default, the screen displays information about the Supernode selected in the previous mode
-     
-    2.9.2. Additional search is provided by SN public ID and block height. If no block height is specified, information is searched for the last SN Stake
-     2.9.3. The Transaction hash  in the Transaction list should contain a link by clicking on which I can go to the new screen with Tx's details (pic.4)
+
+  2.9.1. By default, the screen displays information about the Supernode selected in the previous mode
+
+  2.9.2. Additional search is provided by SN public ID and block height. If no block height is specified, information is searched for the last SN Stake
+
+  2.9.3. The Transaction hash  in the Transaction list should contain a link by clicking on which I can go to the new screen with Tx's details (pic.4)
 
 ### Story#3: As a SN owner I want to see BBList in the Blockchain Explorer  and want to have the ability to search my SN in the BBList
 
 3.1. Go to Blockchain Explorer: https://blockexplorer.graft.network/
+
 3.2 Block “BB List” should be present after block “Supernodes List”  with default info about BB List in last block (pic.2,[4])
+
 3.3. Following info from BB List  should displayed :
-Height
-Public ID
-Tier (0/1/2/3/4)
-StakeAmount
+
+   - Height
+   - Public ID
+   - Tier (0/1/2/3/4)
+   - StakeAmount
+
 3.4. By default I can see info about 11 SNs. For displaying more info I should press button “> more” on the end of BB List.
+
 3.5. By default I can see BB List for the last block. 
+
 3.6. Entering information into the field (pic.2[1]) and pressing the Search button I should see info about  SNs in the BBList in the block  which I search 
+
 3.7. Entering information into the field (pic.2[2]) and pressing the Search button I should see info about  SN  in the BBList which I search 
+
 3.8. Entering information into the fields (pic.2[1]) and (pic.2[2]) and pressing the Search button I should see info about  my SN  in the BBList for the block which I search.
-3.9. The public_ID in the BB List should contain a link by clicking on which I can go to the new screen with SN`s details (pic.3).
-3.9.1. By default, the screen displays information about the Supernode selected in the previous mode.
-3.9.2. Additional search is provided by SN public ID and block height. If no block height is specified, information is searched for the last SN Stake.
-3.9.3. The Transaction hash  in the Transaction list should contain a link by clicking on which I can go to the new screen with Tx`s details (pic.4).
 
+3.9. The public_ID in the BB List should contain a link by clicking on which I can go to the new screen with SN's details (pic.3).
 
+3.9.1. By default, the screen displays information about the Supernode selected in the previous mode
 
+3.9.2. Additional search is provided by SN public ID and block height. If no block height is specified, information is searched for the last SN Stake
+
+3.9.3. The Transaction hash  in the Transaction list should contain a link by clicking on which I can go to the new screen with Tx`s details (pic.4)
 
 
 Pic.2
@@ -122,7 +134,8 @@ Pic.2
 
 Pic.3
 
-Story#4: As a SN owner I want to see AuthSampleList in the Blockchain Explorer  and want to have the ability to search my SN in the AuthSampleList
+### Story#4: As a SN owner I want to see AuthSampleList in the Blockchain Explorer  and want to have the ability to search my SN in the AuthSampleList
+
 4.1. Go to Blockchain Explorer: https://blockexplorer.graft.network/
 4.2 Block “AuthSample List” should be present after block “BB List”  with default info about AuthSample List in last block (pic.2,[5])
 4.3. Following info from AuthSample List  should displayed :
@@ -143,7 +156,8 @@ StakeExpiringBlock
 3.9.3. The Transaction hash  in the Transaction list should contain a link by clicking on which I can go to the new screen with Tx`s details (pic.4).
 
 
-Story#5: As a SN owner I want to see DisqList in the Blockchain Explorer  and want to have the ability to search my SN in the DisqList
+### Story#5: As a SN owner I want to see DisqList in the Blockchain Explorer  and want to have the ability to search my SN in the DisqList
+
 5.1. Go to Blockchain Explorer: https://blockexplorer.graft.network/
 5.2 Block “Disq List” should be present after block “AuthSample List”  with default info about Disq List in last block (pic.2,[6])
 5.3. Following info from Disq List  should displayed :
@@ -167,7 +181,7 @@ Disq StartBlock
 5.9.3. The Transaction hash  in the Transaction list should contain a link by clicking on which I can go to the new screen with Tx`s details (pic.4).
 
 
-Story#6: As a Graft network user  I want to have the ability to see details of RTA  transactions
+### Story#6: As a Graft network user  I want to have the ability to see details of RTA  transactions
 
 6.1. Pressing  on the “Transaction hash” link I should go to the transaction detail Screen (pic.4)
 6.2. Additional info about RTA transaction is displayed in the “RTA info” tab (pic.4).
