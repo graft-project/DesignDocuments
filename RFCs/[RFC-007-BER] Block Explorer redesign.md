@@ -61,10 +61,10 @@ Pic.1
 |---|----------|------|
 |Normal Tx| - | - |
 |RTA Tx||RTA transaction|
-|Stake Tx| |SN Stake transaction partly in stake|
-|Stake Tx (if  Tx amount>=stake amount)| |SN Stake transaction (T1)|
+|Stake Tx|![stake_0](https://user-images.githubusercontent.com/45132833/61710438-5c607d00-ad5a-11e9-8be9-e2217bf033b0.gif)|SN Stake transaction partly in stake|
+|Stake Tx (if  Tx amount>=stake amount)|![stake_1](https://user-images.githubusercontent.com/45132833/61710967-97af7b80-ad5b-11e9-927c-c25660c4d079.png)  ![stake_0](https://user-images.githubusercontent.com/45132833/61710438-5c607d00-ad5a-11e9-8be9-e2217bf033b0.gif)|SN Stake transaction (T1)|
 | Disq Tx| |Disqualification transaction| 
-| Fee Tx| |Stimulus Transaction|
+| Fee Tx|![Fee](https://user-images.githubusercontent.com/45132833/61710751-004a2880-ad5b-11e9-8ddd-01cf6d9b3716.png) |Stimulus Transaction|
 
 
 ### Story#2: As a SN owner I want to see SN List in the Blockchain Explorer  and want to have the ability to search my SN in the SN List
