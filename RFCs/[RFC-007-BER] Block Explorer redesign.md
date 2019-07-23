@@ -101,6 +101,11 @@ Pic.1
 
   2.9.3. The Transaction hash  in the Transaction list should contain a link by clicking on which I can go to the new screen with Tx's details (pic.4)
 
+![2019-07-10_16-04-13](https://user-images.githubusercontent.com/45132833/61707923-346e1b00-ad54-11e9-9af2-ca28476528fe.jpg)
+
+Pic.2
+
+
 ### Story#3: As a SN owner I want to see BBList in the Blockchain Explorer  and want to have the ability to search my SN in the BBList
 
 3.1. Go to Blockchain Explorer: https://blockexplorer.graft.network/
@@ -131,10 +136,6 @@ Pic.1
 3.9.2. Additional search is provided by SN public ID and block height. If no block height is specified, information is searched for the last SN Stake
 
 3.9.3. The Transaction hash  in the Transaction list should contain a link by clicking on which I can go to the new screen with Tx's details (pic.4)
-
-![2019-07-10_16-04-13](https://user-images.githubusercontent.com/45132833/61707923-346e1b00-ad54-11e9-9af2-ca28476528fe.jpg)
-
-Pic.2
 
 ![2019-07-11_01](https://user-images.githubusercontent.com/45132833/61707924-3506b180-ad54-11e9-806c-396161395b96.jpg)
 
@@ -171,6 +172,10 @@ Pic.3
    4.8.2. Additional search is provided by SN public ID and block height. If no block height is specified, information is searched for the last SN Stake.
 
    4.8.3. The Transaction hash  in the Transaction list should contain a link by clicking on which I can go to the new screen with Tx's details (pic.4).
+
+![2019-07-11_02](https://user-images.githubusercontent.com/45132833/61707925-3506b180-ad54-11e9-933a-0baa98691108.jpg)
+
+Pic.4
 
 
 ### Story#5: As a SN owner I want to see DisqList in the Blockchain Explorer  and want to have the ability to search my SN in the DisqList
@@ -226,7 +231,3 @@ Pic.3
      - Stake Amount
      - StakeFirstValidBlock
      - StakeExpiringBlock.
-
-![2019-07-11_02](https://user-images.githubusercontent.com/45132833/61707925-3506b180-ad54-11e9-933a-0baa98691108.jpg)
-
-Pic.4
