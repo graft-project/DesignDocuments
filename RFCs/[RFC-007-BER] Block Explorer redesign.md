@@ -53,7 +53,7 @@ Pic.1
    
    > NOTE: Normal tx is not marked
 
-   1.3.2  A pop-up window should appear with additional info when the cursor hover on the Tx marker.
+   1.3.2  A pop-up window should appear with additional info when the cursor hovers on the Tx marker.
    
    1.3.3  Examples of markers and additional Info in a pop-up window:
    
