@@ -40,6 +40,7 @@
 Pic.1
 
 
+   
    1.3.1 Following transactions are marked:
          - RTA Tx
          - Stake Tx ( and additional marker shows if it Tx is in stake)
@@ -128,8 +129,10 @@ Pic.1
 
 3.9.3. The Transaction hash  in the Transaction list should contain a link by clicking on which I can go to the new screen with Tx's details (pic.4)
 
+![2019-07-10_16-04-13](https://user-images.githubusercontent.com/45132833/61707923-346e1b00-ad54-11e9-9af2-ca28476528fe.jpg)
 
 Pic.2
+
 
 
 Pic.3
@@ -223,3 +226,9 @@ Pic.3
 
 
 Pic.4
+
+
+
+![2019-07-11_01](https://user-images.githubusercontent.com/45132833/61707924-3506b180-ad54-11e9-806c-396161395b96.jpg)
+![2019-07-11_02](https://user-images.githubusercontent.com/45132833/61707925-3506b180-ad54-11e9-933a-0baa98691108.jpg)
+![2019-07-11_14-19-31](https://user-images.githubusercontent.com/45132833/61707926-3506b180-ad54-11e9-9961-0d842ea2e2ae.jpg)
