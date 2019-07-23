@@ -35,7 +35,7 @@
 
 1.3 Column “transaction hash” in the blocks “Transaction pool” and “Transactions in the last 11 blocks” should contain marker for specific Tx (see pic.1[2]).
 
-
+![BE_22](https://user-images.githubusercontent.com/45132833/61708384-5ddb7680-ad55-11e9-9334-b65584ae644c.png)
 
 Pic.1
 
@@ -133,7 +133,7 @@ Pic.1
 
 Pic.2
 
-
+![2019-07-11_01](https://user-images.githubusercontent.com/45132833/61707924-3506b180-ad54-11e9-806c-396161395b96.jpg)
 
 Pic.3
 
@@ -224,11 +224,6 @@ Pic.3
      - StakeFirstValidBlock
      - StakeExpiringBlock.
 
+![2019-07-11_02](https://user-images.githubusercontent.com/45132833/61707925-3506b180-ad54-11e9-933a-0baa98691108.jpg)
 
 Pic.4
-
-
-
-![2019-07-11_01](https://user-images.githubusercontent.com/45132833/61707924-3506b180-ad54-11e9-806c-396161395b96.jpg)
-![2019-07-11_02](https://user-images.githubusercontent.com/45132833/61707925-3506b180-ad54-11e9-933a-0baa98691108.jpg)
-![2019-07-11_14-19-31](https://user-images.githubusercontent.com/45132833/61707926-3506b180-ad54-11e9-9961-0d842ea2e2ae.jpg)
