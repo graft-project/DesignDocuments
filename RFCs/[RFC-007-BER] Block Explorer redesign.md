@@ -45,11 +45,12 @@ Pic.1
 
    
    1.3.1 Following transactions are marked:
-         - RTA Tx
-         - Stake Tx ( and additional marker shows if it Tx is in stake)
-         - Disq Tx
-         - Stimulus Tx
-
+   
+   - RTA Tx
+   - Stake Tx ( and additional marker shows if it Tx is in stake) 
+   - Disq Tx
+   - Stimulus Tx
+   
    > NOTE: Normal tx is not marked
 
    1.3.2  Hovering the cursor on the Tx marker, a pop-up window should appear with additional info.
