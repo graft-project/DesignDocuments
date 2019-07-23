@@ -53,9 +53,10 @@ Pic.1
    
    > NOTE: Normal tx is not marked
 
-   1.3.2  Hovering the cursor on the Tx marker, a pop-up window should appear with additional info.
+   1.3.2  When the cursor hover on the Tx marker, a pop-up window should appear with additional info.
    
-   1.3.3  
+   1.3.3  Examples of markers and additional Info in a pop-up window:
+   
    Table 1
 
 |Tx type|Markers example (can be change to other)|Additional Info in a pop-up window|
