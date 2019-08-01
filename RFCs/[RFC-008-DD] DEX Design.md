@@ -36,6 +36,7 @@ At this stage trust is implied between client and their exchange broker.  In the
 
 ![2019-08-01_14-14-06](https://user-images.githubusercontent.com/45132833/62307370-29219a80-b48c-11e9-8ac9-8bc6451ae67f.jpg)
 
+
 1. Client 1 creates a new trade proposal and sends to the exchange broker (EB1) it’s connected to:
    - Parameters: buy or sell, pair, limit or market price, “good for” time, whether partial is ok, priority, valid to,  # of confirmations required
 2. EB1 prepares to announce the transaction to the network
