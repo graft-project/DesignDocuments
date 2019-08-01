@@ -5,33 +5,6 @@ Collateral transaction is required prior to the order in order to avoid “bad f
 
 At this stage trust is implied between client and their exchange broker.  In the future, this relationship will become trustless.
 
-
-## Client UI
-
-![2019-08-01_13-26-06](https://user-images.githubusercontent.com/45132833/62307369-28890400-b48c-11e9-84b9-ba19dc36cdd3.jpg)
-
-
-## Client
-
-- Connects to the Exchange Broker (EB)
-- Forms transactions
-- Executes trade logic
-- Monitors trade results
-- Posts collateral transactions and requests collateral refunds (?)
-
-
-
-## Exchange Broker 
-- Is a Supernode module
-- Handles trading related communication (broadcast & receive)
-- Sets up and holds multi-signature (MS) wallets (MS wallet requires M:N signatures, with N being the SN sample size and signatories being the SN’s)
-- Provides an RPC API for the client
-
-## Supernodes from the sample
-
-- Each SN validates the transaction by scanning the alt chain
-
-
 ## Workflow:
 
 ![2019-08-01_14-14-06](https://user-images.githubusercontent.com/45132833/62307370-29219a80-b48c-11e9-8ac9-8bc6451ae67f.jpg)
@@ -65,6 +38,33 @@ At this stage trust is implied between client and their exchange broker.  In the
    - Client 2 requests refund of collateral after n confirmations have passed, or
    - Client 2 requests collateral forward if they haven’t received the funds on alt chain
      - EB2 creates tx and coordinates with SN’s for validation and signing
+
+
+## Client UI
+
+![2019-08-01_13-26-06](https://user-images.githubusercontent.com/45132833/62307369-28890400-b48c-11e9-84b9-ba19dc36cdd3.jpg)
+
+
+## Client
+
+- Connects to the Exchange Broker (EB)
+- Forms transactions
+- Executes trade logic
+- Monitors trade results
+- Posts collateral transactions and requests collateral refunds (?)
+
+
+
+## Exchange Broker 
+- Is a Supernode module
+- Handles trading related communication (broadcast & receive)
+- Sets up and holds multi-signature (MS) wallets (MS wallet requires M:N signatures, with N being the SN sample size and signatories being the SN’s)
+- Provides an RPC API for the client
+
+## Supernodes from the sample
+
+- Each SN validates the transaction by scanning the alt chain
+
 
 
 ## Sample Selection:
