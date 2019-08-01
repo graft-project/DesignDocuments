@@ -8,7 +8,7 @@ At this stage trust is implied between client and their exchange broker.  In the
 
 ## Client UI
 
-![2019-08-01_13-26-06](https://user-images.githubusercontent.com/45132833/62286965-86ecbd00-b461-11e9-89ac-d423254cd66c.jpg)
+![2019-08-01_13-26-06](https://user-images.githubusercontent.com/45132833/62307369-28890400-b48c-11e9-84b9-ba19dc36cdd3.jpg)
 
 
 ## Client
@@ -34,7 +34,7 @@ At this stage trust is implied between client and their exchange broker.  In the
 
 ## Workflow:
 
-![2019-08-01_14-14-06](https://user-images.githubusercontent.com/45132833/62289212-c964c880-b466-11e9-99ae-3cd23c302e58.jpg)
+![2019-08-01_14-14-06](https://user-images.githubusercontent.com/45132833/62307370-29219a80-b48c-11e9-8ac9-8bc6451ae67f.jpg)
 
 1. Client 1 creates a new trade proposal and sends to the exchange broker (EB1) it’s connected to:
    - Parameters: buy or sell, pair, limit or market price, “good for” time, whether partial is ok, priority, valid to,  # of confirmations required
