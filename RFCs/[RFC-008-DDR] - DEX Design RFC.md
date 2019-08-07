@@ -1,6 +1,6 @@
 # General Principles 
 
-GRAFT Network DEX is intended to facilitate a decentralized exchange infrastructure for the GRAFT Payment Network as well as function on its own providing fast, binding, collateralized cross-chain exchange capabilities to the trading parties.
+**GRAFT Network DEX**  is intended to facilitate a decentralized exchange infrastructure for the GRAFT Payment Network as well as function on its own providing fast, binding, collateralized cross-chain exchange capabilities to the trading parties.
 
 ## Parameters:
 
@@ -12,7 +12,7 @@ GRAFT Network DEX is intended to facilitate a decentralized exchange infrastruct
 
 ## Concept:
 
-GRAFT DEX as decentralized exchange secured by using fast (RTA) $GRFT based collateral transactions deposited by both trading sides into a multi signature wallet, validated by the Supernode validators.
+**GRAFT DEX** as decentralized exchange secured by using fast (RTA) $GRFT based collateral transactions deposited by both trading sides into a multi signature wallet, validated by the Supernode validators.
 
 ## Workflow:
 
