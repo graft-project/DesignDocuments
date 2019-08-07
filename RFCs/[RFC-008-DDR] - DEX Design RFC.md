@@ -16,7 +16,7 @@ GRAFT DEX as decentralized exchange secured by using fast (RTA) $GRFT based coll
 
 ## Workflow:
 
-![DEX5](https://user-images.githubusercontent.com/45132833/62646303-b7978f80-b956-11e9-9540-fc13f83e2a17.png)
+![DEX5_1](https://user-images.githubusercontent.com/45132833/62647271-d4cd5d80-b958-11e9-9706-8af2ef8a2f91.png)
 
 
 1. _**Client1/EB1->SN_network**_: Select an SN sample
