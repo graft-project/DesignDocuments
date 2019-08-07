@@ -1,4 +1,4 @@
-# General Principles 
+## General Principles 
 
 **GRAFT Network DEX**  is intended to facilitate a decentralized exchange infrastructure for the GRAFT Payment Network as well as function on its own providing fast, binding, collateralized cross-chain exchange capabilities to the trading parties.
 
@@ -56,7 +56,7 @@ For this phase, client, exchange broker, and (proxy or full) SN maintain a trust
 
 ![2019-08-07_21-09-00](https://user-images.githubusercontent.com/45132833/62646777-badf4b00-b957-11e9-944d-d487f8888593.jpg)
 
-### Client / Exchange Broker
+## Client / Exchange Broker
 
 - Connects to the Exchange Broker (EB)
 - Forms transactions
@@ -65,20 +65,20 @@ For this phase, client, exchange broker, and (proxy or full) SN maintain a trust
 - Monitors trade results
 - Posts collateral transactions and requests collateral refunds 
 
-### Exchange Broker
+## Exchange Broker
 
 - Is a Supernode module
 - Handles trading related communication (broadcast & receive)
 - Provides an RPC (HTTPs?) API for the client
 - Participates in distributed order book
 
-### Supernodes from the sample
+## Supernodes from the sample
 
 - Collect info about the trade transaction from the parties
 - Validate the trades on request by matching against agreed parameters
 - Process collateral forward and refund requests
 
-### Sample Selection:
+## Sample Selection:
 
 - M:N (TBD)
 - Based on current Auth sample selection (? TBD)
