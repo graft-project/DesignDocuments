@@ -1,4 +1,4 @@
-# Exchange Broker Network and Collateralized Atomic-swap DEX
+# Exchange Broker Network and Collateralized DEX
 
 ## General Principles 
 
