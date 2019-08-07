@@ -16,36 +16,35 @@ GRAFT DEX as decentralized exchange secured by using fast (RTA) $GRFT based coll
 
 ## Workflow:
 
+![DEX5](https://user-images.githubusercontent.com/45132833/62646303-b7978f80-b956-11e9-9540-fc13f83e2a17.png)
 
 
+1. _**Client1/EB1->SN_network**_: Select an SN sample
+2. _**Client1/EB1->SN_network**_: Sends a trade proposal (spot or strike), trade proposal fee and trade parameters (exchange terms, # confirmations, ttl, etc) via SN network
+3. _**EB2/Client2->Client1/EB1**_: Sends proposal / agrees to a trade
+4. _**Client1/EB1->Client1/EB1**_: Selects offer(s)
+5. _**Client1/EB1>SN_network**_: Create MS wallet with SN sample as signatories
+6. _**Client1/EB1->SN_network**_: Sends collateral to MS wallet (RTA) (alt-chain receive address in metadata)
 
+7. _**Client1/EB1->EB2/Client2**_: Acknowledges offer, forwards MS wallet address
+8. _**EB2/Client2->SN_network**_: Sends collateral to MS wallet (RTA) (alt-chain receive address in metadata)
+9. _**Client1/EB1->SN_network**_: Verifies collateral (via SN sample)
 
-- Client1/EB1->SN_network: Select an SN sample
-- Client1/EB1->SN_network: Sends a trade proposal (spot or strike), trade proposal fee and trade parameters (exchange terms, # confirmations, ttl, etc) via SN network
-- EB2/Client2->Client1/EB1: Sends proposal / agrees to a trade
-- Client1/EB1->Client1/EB1: Selects offer(s)
-- Client1/EB1>SN_network: Create MS wallet with SN sample as signatories
-- Client1/EB1->SN_network: Sends collateral to MS wallet (RTA) (alt-chain receive address in metadata)
-
-- Client1/EB1->EB2/Client2: Acknowledges offer, forwards MS wallet address
-- EB2/Client2->SN_network: Sends collateral to MS wallet (RTA) (alt-chain receive address in metadata)
-- Client1/EB1->SN_network: Verifies collateral (via SN sample)
-
-- Client1/EB1->EB2/Client2: Send alt-chain tx 
-- Client1/EB1->SN_network: Forward data about alt-chain tx to SN validator sample, 
-- SN_network: Verifies and records 1’s collateral tx with data (alt-chain txid, cross-collateral, trade id, trade params) */fee
-- EB2/Client2->SN_network: Verifies collateral (via SN sample)
-- EB2/Client2->Client1/EB1: Send alt-chain tx
-- EB2/Client2->SN_network: Forward data about alt-chain tx to SN validator sample
-- SN_network: Verifies and records 2’s collateral tx with data (alt-chain txid, cross-collateral, trade id, trade params) */fee
+10. _**Client1/EB1->EB2/Client2**_: Send alt-chain tx 
+11. _**Client1/EB1->SN_network**_: Forward data about alt-chain tx to SN validator sample, 
+12. _**SN_network**_: Verifies and records 1’s collateral tx with data (alt-chain txid, cross-collateral, trade id, trade params) */fee
+13. _**EB2/Client2->SN_network**_: Verifies collateral (via SN sample)
+14. _**EB2/Client2->Client1/EB1**_: Send alt-chain tx
+15. _**EB2/Client2->SN_network**_: Forward data about alt-chain tx to SN validator sample
+16. _**SN_network**_: Verifies and records 2’s collateral tx with data (alt-chain txid, cross-collateral, trade id, trade params) */fee
 
 
 ## Settlement:
 
-- Client1/EB1->SN_network: Requests refund or forward of the collateral
-- SN_network->Client1/EB1: Validates and forward collateral */fee
-- EB2/Client2->SN_network: Requests refund or forward of the collateral, along with validation fee
-- SN_network->EB2/Client2: Validates and forward collateral */fee
+- _**Client1/EB1->SN_network**_: Requests refund or forward of the collateral
+- _**SN_network->Client1/EB1**_: Validates and forward collateral */fee
+- _**EB2/Client2->SN_network**_: Requests refund or forward of the collateral, along with validation fee
+- _**SN_network->EB2/Client2**_: Validates and forward collateral */fee
 
 
 ## Assumptions:
@@ -55,7 +54,7 @@ For this phase, client, exchange broker, and (proxy or full) SN maintain a trust
 
 ## Client UI
 
-
+![2019-08-07_21-09-00](https://user-images.githubusercontent.com/45132833/62646777-badf4b00-b957-11e9-944d-d487f8888593.jpg)
 
 ### Client / Exchange Broker
 
