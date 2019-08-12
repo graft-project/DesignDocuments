@@ -56,7 +56,7 @@ For this phase, client, exchange broker, and (proxy or full) SN maintain a trust
 
 ## Client UI
 
-![2019-08-08_18-28-32](https://user-images.githubusercontent.com/45132833/62716234-7cef2f00-ba0a-11e9-8477-cce364a64f50.jpg)
+![image_2019_08_12T07_17_55_000Z](https://user-images.githubusercontent.com/45132833/62850418-73f0ad00-bceb-11e9-85be-975a8efc5501.png)
 
 
 ## Client / Exchange Broker
